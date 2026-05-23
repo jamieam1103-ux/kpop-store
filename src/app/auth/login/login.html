@@ -1,0 +1,10 @@
+<div class="login-container">
+  <h2>Iniciar Sesión</h2>
+  <form [formGroup]="form" (ngSubmit)="login()">
+    <input formControlName="email" type="email" placeholder="Email"/>
+    <input formControlName="password" type="password" placeholder="Contraseña"/>
+    <p class="error" *ngIf="error">{{ error }}</p>
+    <button type="submit">Entrar</button>
+    <a routerLink="/registro">¿No tienes cuenta? Regístrate</a>
+  </form>
+</div>
