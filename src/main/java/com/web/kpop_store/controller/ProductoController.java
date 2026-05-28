@@ -1,15 +1,18 @@
 package com.web.kpop_store.controller;
 
+import com.web.kpop_store.dto.ProductoDTO;
 import com.web.kpop_store.jikan.JikanService;
-import java.util.Map;
 import com.web.kpop_store.entity.Producto;
 import com.web.kpop_store.entity.Variante;
 import com.web.kpop_store.service.ProductoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/productos")

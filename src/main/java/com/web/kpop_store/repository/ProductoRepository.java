@@ -7,9 +7,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
-
     List<Producto> findByCategoria(String categoria);
-
+    List<Producto> findByNombreContainingIgnoreCase(String nombre);
+    
     @Query("SELECT p FROM Producto p WHERE p.nombre LIKE %:nombre%")
     List<Producto> buscarPorNombre(@Param("nombre") String nombre);
 }
