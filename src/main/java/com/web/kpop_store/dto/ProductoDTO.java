@@ -1,15 +1,20 @@
 package com.web.kpop_store.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import java.util.List;
 
 @Data
 public class ProductoDTO {
 
     private Long id;
+
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
+
     private String descripcion;
+
     private String imagen;
-    private String categoria;
-    private List<VarianteDTO> variantes;
+
+    @NotBlank(message = "La categoría es obligatoria")
+    private String categoria; // KPOP, ANIME
 }

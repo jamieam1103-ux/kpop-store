@@ -29,4 +29,8 @@ public class Usuario {
     private Rol rol;
 
     private boolean activo = true;
+
+    public Rol getRol() {
+        return rol;
+    }
 }

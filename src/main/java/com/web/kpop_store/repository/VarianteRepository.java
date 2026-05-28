@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface VarianteRepository extends JpaRepository<Variante, Long> {
+    List<Variante> findByProductoId(Long productoId);
+    List<Variante> findByStockLessThanEqual(Integer stockMinimo);
 
     @Query("SELECT v FROM Variante v WHERE v.stock <= v.stockMinimo")
     List<Variante> findVariantesConStockBajo();
