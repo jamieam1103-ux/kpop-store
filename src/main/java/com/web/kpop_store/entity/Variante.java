@@ -16,7 +16,7 @@ public class Variante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String descripcion; // ej: "Talla M", "Color rojo"
+    private String descripcion;
 
     private Double precio;
 
