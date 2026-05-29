@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap');
+.historial-page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+.page-header { margin-bottom: 40px; border-bottom: 1px solid rgba(255,45,120,0.15); padding-bottom: 24px; }
+.page-header h1 { font-family: 'Bebas Neue', cursive; font-size: 52px; letter-spacing: 0.04em; line-height: 1; background: linear-gradient(135deg, #fff 40%, #FF2D78); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.page-header p { color: #9880B0; margin-top: 6px; }
+.spinner { width: 40px; height: 40px; border: 3px solid rgba(255,45,120,0.15); border-top-color: #FF2D78; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 60px auto; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.empty-state { text-align: center; padding: 80px 40px; }
+.empty-state .icon { font-size: 56px; margin-bottom: 16px; }
+.empty-state h3 { font-size: 22px; color: #F0E6FF; margin-bottom: 8px; }
+.empty-state p { color: #9880B0; }
+.pedidos-grid { display: flex; flex-direction: column; gap: 20px; }
+.pedido-card { background: #1A1A24; border: 1px solid rgba(255,45,120,0.18); border-radius: 18px; overflow: hidden; transition: 0.25s ease; animation: slideUp 0.3s ease both; }
+.pedido-card:hover { border-color: #FF2D78; box-shadow: 0 4px 28px rgba(255,45,120,0.13); }
+@keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.pedido-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; border-bottom: 1px solid rgba(255,45,120,0.1); background: rgba(255,45,120,0.03); }
+.pedido-meta { display: flex; align-items: center; gap: 14px; }
+.pedido-id { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 15px; color: #FF2D78; }
+.pedido-fecha { font-size: 13px; color: #9880B0; }
+.estado-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.estado-pendiente  { background: rgba(255,215,0,0.12);   color: #FFD700; border: 1px solid rgba(255,215,0,0.3); }
+.estado-procesando { background: rgba(255,165,0,0.12);   color: #FFA500; border: 1px solid rgba(255,165,0,0.3); }
+.estado-enviado    { background: rgba(100,200,255,0.12); color: #64C8FF; border: 1px solid rgba(100,200,255,0.3); }
+.estado-entregado  { background: rgba(0,229,160,0.12);   color: #00E5A0; border: 1px solid rgba(0,229,160,0.3); }
+.estado-cancelado  { background: rgba(255,69,96,0.12);   color: #FF4560; border: 1px solid rgba(255,69,96,0.3); }
+.pedido-items { padding: 16px 24px; display: flex; flex-direction: column; gap: 8px; }
+.pedido-item-row { display: flex; align-items: center; gap: 12px; font-size: 13px; }
+.detalle-nombre { flex: 1; color: #D0C0E8; }
+.detalle-qty { color: #9880B0; min-width: 36px; }
+.detalle-precio { font-family: 'Space Mono', monospace; font-size: 13px; color: #F0E6FF; font-weight: 700; }
+.pedido-foot { padding: 16px 24px; border-top: 1px solid rgba(255,45,120,0.1); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.pedido-total { display: flex; flex-direction: column; gap: 2px; }
+.pedido-total span:first-child { font-size: 11px; color: #9880B0; text-transform: uppercase; letter-spacing: 0.08em; }
+.total-val { font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 700; color: #FF2D78; }
+.pedido-detalles summary { font-size: 13px; color: #9880B0; cursor: pointer; padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255,45,120,0.2); transition: 0.2s; list-style: none; }
+.pedido-detalles summary:hover { color: #FF2D78; border-color: #FF2D78; }
+.detalles-extra { margin-top: 12px; padding: 14px; background: rgba(255,45,120,0.05); border-radius: 10px; font-size: 13px; display: flex; flex-direction: column; gap: 6px; color: #9880B0; }
+.detalles-extra strong { color: #F0E6FF; }
+.kpop-btn { display: inline-flex; align-items: center; padding: 11px 24px; background: linear-gradient(135deg, #FF2D78, #7B2FBE); color: #fff; font-weight: 700; font-size: 14px; border: none; border-radius: 10px; cursor: pointer; transition: 0.25s; text-decoration: none; }
+.kpop-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(255,45,120,0.3); }

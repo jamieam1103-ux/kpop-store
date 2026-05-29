@@ -1,0 +1,72 @@
+<div class="carrito-page">
+
+  <div class="carrito-header">
+    <h1>🛒 Mi Carrito</h1>
+    <p>{{ carritoService.items().length }} {{ carritoService.items().length === 1 ? 'item' : 'items' }}</p>
+  </div>
+
+  <div class="empty-cart" *ngIf="carritoService.items().length === 0">
+    <div class="empty-icon">🛍️</div>
+    <h2>Tu carrito está vacío</h2>
+    <p>Explora nuestro catálogo y agrega tus productos favoritos</p>
+    <a routerLink="/catalogo" class="kpop-btn">Ver Catálogo</a>
+  </div>
+
+  <div class="carrito-layout" *ngIf="carritoService.items().length > 0">
+
+    <div class="carrito-items">
+      <div class="carrito-item" *ngFor="let item of carritoService.items()">
+        <div class="item-img">
+          <img src="assets/placeholder.png" alt="producto" />
+        </div>
+        <div class="item-info">
+          <h3>Variante #{{ item.varianteId }}</h3>
+          <p class="item-variante">{{ item.descripcion }}</p>
+          <p class="item-precio">S/ {{ item.precio | number:'1.2-2' }}</p>
+        </div>
+        <div class="item-controls">
+          <div class="qty-control">
+            <button class="qty-btn" (click)="carritoService.eliminar(item.varianteId)">−</button>
+            <span class="qty-num">{{ item.cantidad }}</span>
+            <button class="qty-btn">+</button>
+          </div>
+          <p class="item-subtotal">S/ {{ (item.precio * item.cantidad) | number:'1.2-2' }}</p>
+          <button class="remove-btn" (click)="carritoService.eliminar(item.varianteId)" title="Eliminar">🗑️</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="carrito-resumen">
+      <div class="resumen-card">
+        <h2>Resumen del pedido</h2>
+        <div class="resumen-lineas">
+          <div class="resumen-linea" *ngFor="let item of carritoService.items()">
+            <span>Variante #{{ item.varianteId }} × {{ item.cantidad }}</span>
+            <span>S/ {{ (item.precio * item.cantidad) | number:'1.2-2' }}</span>
+          </div>
+        </div>
+        <div class="resumen-divider"></div>
+        <div class="resumen-total">
+          <span>Total</span>
+          <span class="total-amount">S/ {{ carritoService.total() | number:'1.2-2' }}</span>
+        </div>
+        <button class="checkout-btn" (click)="confirmarPedido()" [disabled]="cargando">
+          <span *ngIf="!cargando">✨ Confirmar Pedido</span>
+          <span *ngIf="cargando">Procesando...</span>
+        </button>
+        <button class="clear-btn" (click)="carritoService.limpiar()">Vaciar carrito</button>
+        <p class="secure-msg">🔒 Pago 100% seguro con JWT</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pedido-exito" *ngIf="pedidoConfirmado">
+    <div class="exito-content">
+      <div class="exito-icon">🎉</div>
+      <h2>¡Pedido confirmado!</h2>
+      <p>Tu pedido #{{ pedidoId }} fue procesado correctamente</p>
+      <a routerLink="/historial" class="kpop-btn">Ver mis pedidos</a>
+    </div>
+  </div>
+
+</div>

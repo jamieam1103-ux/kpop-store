@@ -3,17 +3,20 @@ package com.web.kpop_store.service;
 import com.web.kpop_store.entity.Rol;
 import com.web.kpop_store.entity.Usuario;
 import com.web.kpop_store.repository.UsuarioRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
+
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+        this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public Usuario registrar(Usuario usuario) {
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
@@ -22,9 +25,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public List<Usuario> listarTodos() {
-        return usuarioRepository.findAll();
-    }
+    public List<Usuario> listarTodos() { return usuarioRepository.findAll(); }
 
     public Usuario toggleActivo(Long id) {
         Usuario usuario = usuarioRepository.findById(id)

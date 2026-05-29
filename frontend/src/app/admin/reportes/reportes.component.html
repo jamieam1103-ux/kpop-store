@@ -1,0 +1,73 @@
+<div class="reportes-page">
+  <div class="dash-topbar">
+    <div>
+      <h1>Reportes</h1>
+      <p>Análisis de ventas y métricas del negocio</p>
+    </div>
+  </div>
+  <div *ngIf="cargando" class="spinner"></div>
+  <div *ngIf="!cargando">
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon">💰</div>
+        <div class="kpi-data"><span class="kpi-label">Ingresos Totales</span><span class="kpi-value">S/ {{ totalIngresos | number:'1.2-2' }}</span></div>
+      </div>
+      <div class="kpi-card kpi-card--purple">
+        <div class="kpi-icon">📦</div>
+        <div class="kpi-data"><span class="kpi-label">Total Pedidos</span><span class="kpi-value">{{ totalPedidos }}</span></div>
+      </div>
+      <div class="kpi-card kpi-card--green">
+        <div class="kpi-icon">🛍️</div>
+        <div class="kpi-data"><span class="kpi-label">Unidades Vendidas</span><span class="kpi-value">{{ totalUnidades }}</span></div>
+      </div>
+      <div class="kpi-card kpi-card--blue">
+        <div class="kpi-icon">📊</div>
+        <div class="kpi-data"><span class="kpi-label">Ticket Promedio</span><span class="kpi-value">S/ {{ ticketPromedio | number:'1.2-2' }}</span></div>
+      </div>
+    </div>
+    <div class="section-grid">
+      <div class="report-card">
+        <h2>Ventas por Categoría</h2>
+        <div class="categoria-bars">
+          <div class="cat-bar-item" *ngFor="let cat of ventasPorCategoria">
+            <div class="cat-bar-header">
+              <span class="cat-name"><span class="cat-dot" [style.background]="cat.color"></span>{{ cat.nombre }}</span>
+              <span class="cat-amount">S/ {{ cat.total | number:'1.2-2' }}</span>
+            </div>
+            <div class="cat-bar-track"><div class="cat-bar-fill" [style.width.%]="cat.porcentaje" [style.background]="cat.color"></div></div>
+            <span class="cat-pct">{{ cat.porcentaje | number:'1.0-0' }}%</span>
+          </div>
+        </div>
+      </div>
+      <div class="report-card">
+        <h2>Pedidos por Estado</h2>
+        <div class="estado-list">
+          <div class="estado-item" *ngFor="let est of pedidosPorEstado">
+            <div class="estado-left"><span class="estado-badge" [ngClass]="'estado-' + est.nombre">{{ est.nombre }}</span></div>
+            <div class="estado-bar-wrap"><div class="estado-bar-fill" [style.width.%]="est.porcentaje"></div></div>
+            <span class="estado-count">{{ est.cantidad }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="report-card full-width">
+      <h2>Top Productos Vendidos</h2>
+      <div class="top-table-wrap">
+        <table class="top-table">
+          <thead><tr><th>#</th><th>Producto / Variante</th><th>Unidades</th><th>Ingresos</th></tr></thead>
+          <tbody>
+          <tr *ngFor="let prod of topProductos; let i = index">
+            <td><span class="rank" [class.rank-gold]="i===0" [class.rank-silver]="i===1" [class.rank-bronze]="i===2">{{ i + 1 }}</span></td>
+            <td>{{ prod.nombre }}</td>
+            <td><span class="units-badge">{{ prod.unidades }}</span></td>
+            <td><span class="ingreso-val">S/ {{ prod.ingresos | number:'1.2-2' }}</span></td>
+          </tr>
+          <tr *ngIf="topProductos.length === 0">
+            <td colspan="4" style="text-align:center;color:#9880B0;padding:32px">Sin datos disponibles</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

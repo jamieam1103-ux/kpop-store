@@ -3,7 +3,6 @@ package com.web.kpop_store.controller;
 import com.web.kpop_store.entity.Usuario;
 import com.web.kpop_store.security.JwtUtil;
 import com.web.kpop_store.service.UsuarioService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,12 +11,17 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@RequiredArgsConstructor
 public class AuthController {
 
     private final UsuarioService usuarioService;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
+
+    public AuthController(UsuarioService usuarioService, JwtUtil jwtUtil, AuthenticationManager authenticationManager) {
+        this.usuarioService = usuarioService;
+        this.jwtUtil = jwtUtil;
+        this.authenticationManager = authenticationManager;
+    }
 
     @PostMapping("/registro")
     public ResponseEntity<Usuario> registro(@RequestBody Usuario usuario) {

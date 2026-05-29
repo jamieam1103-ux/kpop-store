@@ -2,7 +2,6 @@ package com.web.kpop_store.controller;
 
 import com.web.kpop_store.dto.PedidoDTO;
 import com.web.kpop_store.service.PedidoService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +9,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pedidos")
-@RequiredArgsConstructor
 public class PedidoController {
 
     private final PedidoService pedidoService;
+
+    public PedidoController(PedidoService pedidoService) {
+        this.pedidoService = pedidoService;
+    }
 
     @PostMapping
     public ResponseEntity<PedidoDTO> crear(@RequestBody PedidoDTO dto) {
