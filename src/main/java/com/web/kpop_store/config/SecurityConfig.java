@@ -1,7 +1,6 @@
 package com.web.kpop_store.config;
 
 import com.web.kpop_store.security.JwtFilter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,11 +15,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
-@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
     private final CorsConfigurationSource corsConfigurationSource;
+
+    public SecurityConfig(JwtFilter jwtFilter, CorsConfigurationSource corsConfigurationSource) {
+        this.jwtFilter = jwtFilter;
+        this.corsConfigurationSource = corsConfigurationSource;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -30,23 +33,13 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-
-                        // ── Autenticación (sin token) ──────────────────
                         .requestMatchers("/api/auth/**").permitAll()
-
-                        // ── Productos: GET público, escritura requiere login ──
                         .requestMatchers(HttpMethod.GET, "/api/productos/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/productos/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/productos/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/productos/**").hasRole("ADMIN")
-
-                        // ── Pedidos: requieren login ───────────────────
                         .requestMatchers("/api/pedidos/**").authenticated()
-
-                        // ── Admin: solo ADMIN ──────────────────────────
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-
-                        // ── Todo lo demás requiere autenticación ───────
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

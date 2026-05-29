@@ -1,0 +1,64 @@
+<div class="dashboard-page">
+  <div class="dash-topbar">
+    <div>
+      <h1>Panel Admin</h1>
+      <p>Gestión de pedidos de la tienda</p>
+    </div>
+    <div class="dash-stats">
+      <div class="stat-pill">
+        <span class="stat-num">{{ pedidos.length }}</span>
+        <span class="stat-label">Total pedidos</span>
+      </div>
+      <div class="stat-pill stat-pill--green">
+        <span class="stat-num">{{ getConteo('ENTREGADO') }}</span>
+        <span class="stat-label">Entregados</span>
+      </div>
+      <div class="stat-pill stat-pill--yellow">
+        <span class="stat-num">{{ getConteo('PENDIENTE') }}</span>
+        <span class="stat-label">Pendientes</span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="cargando" class="spinner"></div>
+  <div *ngIf="!cargando && pedidos.length === 0" class="empty-state">
+    <div class="icon">📋</div>
+    <h3>Sin pedidos</h3>
+    <p>Cuando los clientes realicen compras aparecerán aquí</p>
+  </div>
+  <div class="pedidos-table-wrap" *ngIf="!cargando && pedidos.length > 0">
+    <table class="pedidos-table">
+      <thead>
+      <tr>
+        <th>#</th><th>Cliente</th><th>Fecha</th><th>Items</th><th>Total</th><th>Estado</th><th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let pedido of pedidos" class="table-row">
+        <td><span class="pedido-id-cell">#{{ pedido.id }}</span></td>
+        <td>
+          <div class="cliente-cell">
+            <div class="cliente-avatar">{{ (pedido.usuarioNombre || 'U')[0].toUpperCase() }}</div>
+            <span>{{ pedido.usuarioNombre || 'Usuario #' + pedido.usuarioId }}</span>
+          </div>
+        </td>
+        <td><span class="fecha-cell">{{ pedido.fecha | date:'dd/MM/yy HH:mm' }}</span></td>
+        <td><span class="items-cell">{{ pedido.detalles.length || 0 }} items</span></td>  <!-- ← quitado ?. -->
+        <td><span class="total-cell">S/ {{ pedido.total | number:'1.2-2' }}</span></td>
+        <td>
+          <span class="estado-badge" [ngClass]="getEstadoClass(pedido.estado)">{{ pedido.estado }}</span>
+        </td>
+        <td>
+          <select class="estado-select" [value]="pedido.estado"
+                  (change)="cambiarEstado(pedido.id, $any($event.target).value)">
+            <option value="PENDIENTE">PENDIENTE</option>
+            <option value="PROCESANDO">PROCESANDO</option>
+            <option value="ENVIADO">ENVIADO</option>
+            <option value="ENTREGADO">ENTREGADO</option>
+            <option value="CANCELADO">CANCELADO</option>
+          </select>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -4,20 +4,23 @@ import com.web.kpop_store.dto.DetallePedidoDTO;
 import com.web.kpop_store.dto.PedidoDTO;
 import com.web.kpop_store.entity.*;
 import com.web.kpop_store.repository.*;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class PedidoService {
 
-    // ✅ Múltiples dependencias inyectadas por constructor
     private final PedidoRepository pedidoRepository;
     private final UsuarioRepository usuarioRepository;
     private final VarianteRepository varianteRepository;
+
+    public PedidoService(PedidoRepository pedidoRepository, UsuarioRepository usuarioRepository, VarianteRepository varianteRepository) {
+        this.pedidoRepository = pedidoRepository;
+        this.usuarioRepository = usuarioRepository;
+        this.varianteRepository = varianteRepository;
+    }
 
     public PedidoDTO crear(PedidoDTO dto) {
         Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
@@ -31,7 +34,6 @@ public class PedidoService {
         List<DetallePedido> detalles = dto.getDetalles().stream().map(d -> {
             Variante v = varianteRepository.findById(d.getVarianteId())
                     .orElseThrow(() -> new RuntimeException("Variante no encontrada"));
-            // Descontar stock
             v.setStock(v.getStock() - d.getCantidad());
             varianteRepository.save(v);
 
@@ -66,7 +68,6 @@ public class PedidoService {
         return toDTO(pedidoRepository.save(p));
     }
 
-    // ── Mapeo Entidad → DTO ───────────────────────────────────
     private PedidoDTO toDTO(Pedido p) {
         PedidoDTO dto = new PedidoDTO();
         dto.setId(p.getId());
