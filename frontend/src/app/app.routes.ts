@@ -6,6 +6,12 @@ export const routes: Routes = [
   { path: '', redirectTo: '/carrito', pathMatch: 'full' },
 
   {
+    path: 'catalogo',
+    loadComponent: () => import('./catalogo/catalogo.component')
+      .then(m => m.CatalogoComponent)
+  },
+
+  {
     path: 'carrito',
     loadComponent: () => import('./carrito/carrito/carrito.component')
       .then(m => m.CarritoComponent)
