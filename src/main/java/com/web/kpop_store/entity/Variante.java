@@ -7,16 +7,12 @@ public class Variante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-<<<<<<< HEAD
-    private String descripcion;
-=======
 
     private String descripcion;
-
->>>>>>> 6fabece6bfe3119b6ee4ac964f693bb1d89fd77e
     private Double precio;
     private Integer stock;
     private Integer stockMinimo;
+
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
