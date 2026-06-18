@@ -14,8 +14,10 @@ public class Producto {
     private String imagen;
     @Column(nullable = false)
     private String categoria;
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties("producto")
     private List<Variante> variantes;
+
 
     public Producto() {}
 

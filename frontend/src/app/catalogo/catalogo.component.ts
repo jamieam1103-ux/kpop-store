@@ -1,8 +1,8 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CarritoService } from '../services/carrito.service';
+import { ProductoService, ProductoBackend } from '../services/producto.service';
 
 export interface Producto {
   id: number;
@@ -10,7 +10,7 @@ export interface Producto {
   descripcion: string;
   precio: number;
   imagen?: string;
-  categoria: 'K-POP' | 'ANIME' | 'TODOS';
+  categoria: string;
   varianteId: number;
 }
 
@@ -21,25 +21,16 @@ export interface Producto {
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.css']
 })
-export class CatalogoComponent {
+export class CatalogoComponent implements OnInit {
 
   categorias = ['TODOS', 'K-POP', 'ANIME'];
   categoriaActiva = 'TODOS';
   busqueda = '';
   toastVisible = false;
+  cargando = false;
   private toastTimer: any;
 
-  // ── Datos mock — reemplazar con llamada al backend ──
-  private productos = signal<Producto[]>([
-    { id: 1, varianteId: 101, nombre: 'Album BTS – MAP OF THE SOUL', descripcion: 'Edición estándar con photocard incluida', precio: 89.90, categoria: 'K-POP', imagen: '' },
-    { id: 2, varianteId: 102, nombre: 'Lightstick BLACKPINK', descripcion: 'Oficial versión 2 con Bluetooth', precio: 149.90, categoria: 'K-POP', imagen: '' },
-    { id: 3, varianteId: 103, nombre: 'Póster STRAY KIDS', descripcion: 'Set de 4 pósters premium 30x40cm', precio: 49.90, categoria: 'K-POP', imagen: '' },
-    { id: 4, varianteId: 104, nombre: 'Figura Naruto Uzumaki', descripcion: 'PVC articulado 18cm edición coleccionista', precio: 129.90, categoria: 'ANIME', imagen: '' },
-    { id: 5, varianteId: 105, nombre: 'Peluche Totoro Grande', descripcion: 'Suave, 40cm, oficial Studio Ghibli', precio: 99.90, categoria: 'ANIME', imagen: '' },
-    { id: 6, varianteId: 106, nombre: 'Keychain Attack on Titan', descripcion: 'Set de 6 llaveros metálicos', precio: 34.90, categoria: 'ANIME', imagen: '' },
-    { id: 7, varianteId: 107, nombre: 'Washi Tape NewJeans', descripcion: 'Pack de 3 rollos decorativos', precio: 24.90, categoria: 'K-POP', imagen: '' },
-    { id: 8, varianteId: 108, nombre: 'Figura Demon Slayer – Tanjiro', descripcion: 'Resina pintada a mano, 15cm', precio: 159.90, categoria: 'ANIME', imagen: '' },
-  ]);
+  private productos = signal<Producto[]>([]);
 
   productosFiltrados = computed(() => {
     return this.productos().filter(p => {
@@ -49,11 +40,37 @@ export class CatalogoComponent {
     });
   });
 
-  constructor(private carritoService: CarritoService) {}
+  constructor(
+    private carritoService: CarritoService,
+    private productoService: ProductoService
+  ) {}
 
-  filtrar(cat: string) {
-    this.categoriaActiva = cat;
+  ngOnInit() {
+    this.cargando = true;
+    this.productoService.listar().subscribe({
+      next: (data: ProductoBackend[]) => {
+        const mapeados: Producto[] = data
+          .filter(p => p.variantes && p.variantes.length > 0)
+          .map(p => ({
+            id: p.id,
+            nombre: p.nombre,
+            descripcion: p.descripcion,
+            imagen: p.imagen,
+            categoria: p.categoria,
+            precio: p.variantes[0].precio,
+            varianteId: p.variantes[0].id
+          }));
+        this.productos.set(mapeados);
+        this.cargando = false;
+      },
+      error: (err) => {
+        console.error('Error cargando productos:', err);
+        this.cargando = false;
+      }
+    });
   }
+
+  filtrar(cat: string) { this.categoriaActiva = cat; }
 
   limpiarFiltros() {
     this.categoriaActiva = 'TODOS';
