@@ -10,6 +10,7 @@ public class Producto {
     private Long id;
     @Column(nullable = false)
     private String nombre;
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
     private String imagen;
     @Column(nullable = false)

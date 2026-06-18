@@ -81,7 +81,7 @@ export class CatalogoComponent implements OnInit {
     this.carritoService.agregar({
       varianteId: p.varianteId,
       productoNombre: p.nombre,
-      descripcion: p.descripcion,
+      descripcion: p.descripcion ? p.descripcion.substring(0, 80) + '...' : '',
       precio: p.precio,
       imagen: p.imagen || '',
       cantidad: 1
