@@ -109,7 +109,7 @@ public class ProductoController {
         p.setNombre((String) manga.get("title"));
         p.setDescripcion((String) manga.get("synopsis"));
         p.setImagen((String) jpg.get("image_url"));
-        p.setCategoria("ANIME");
+        p.setCategoria("MANGA");
         return productoService.guardar(p);
     }
 

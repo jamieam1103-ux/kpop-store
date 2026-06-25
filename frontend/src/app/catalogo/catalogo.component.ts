@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CarritoService } from '../services/carrito.service';
 import { ProductoService, ProductoBackend } from '../services/producto.service';
+import {RouterLink} from '@angular/router';
 
 export interface Producto {
   id: number;
@@ -11,19 +12,20 @@ export interface Producto {
   precio: number;
   imagen?: string;
   categoria: string;
+  subcategoria?: string;
   varianteId: number;
 }
 
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.css']
 })
 export class CatalogoComponent implements OnInit {
 
-  categorias = ['TODOS', 'K-POP', 'ANIME'];
+  categorias = ['TODOS', 'K-POP', 'CDS', 'MANGA', 'MERCH'];
   categoriaActiva = 'TODOS';
   busqueda = '';
   toastVisible = false;
@@ -41,7 +43,7 @@ export class CatalogoComponent implements OnInit {
   });
 
   constructor(
-    private carritoService: CarritoService,
+    public carritoService: CarritoService,
     private productoService: ProductoService
   ) {}
 
@@ -57,6 +59,7 @@ export class CatalogoComponent implements OnInit {
             descripcion: p.descripcion,
             imagen: p.imagen,
             categoria: p.categoria,
+            subcategoria: p.subcategoria,
             precio: p.variantes[0].precio,
             varianteId: p.variantes[0].id
           }));

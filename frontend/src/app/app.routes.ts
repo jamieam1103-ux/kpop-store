@@ -3,10 +3,17 @@ import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/carrito', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  {
+    path: 'login',
+    loadComponent: () => import('./login/login')
+      .then(m => m.LoginComponent)
+  },
 
   {
     path: 'catalogo',
+    canActivate: [authGuard],
     loadComponent: () => import('./catalogo/catalogo.component')
       .then(m => m.CatalogoComponent)
   },
@@ -38,5 +45,5 @@ export const routes: Routes = [
       .then(m => m.ReportesComponent)
   },
 
-  { path: '**', redirectTo: '/carrito' }
+  { path: '**', redirectTo: '/login' }
 ];

@@ -7,6 +7,8 @@
 .catalogo-header { margin-bottom: 36px; }
 .catalogo-header h1 { font-family: 'Bebas Neue', cursive; font-size: 48px; letter-spacing: 0.05em; background: linear-gradient(135deg, #fff 40%, #FF2D78); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
 .catalogo-header p { color: #9880B0; margin-top: 6px; font-size: 14px; }
+.carrito-btn { position: fixed; top: 20px; right: 30px; font-size: 1.8rem; background: #e040fb; border-radius: 50%; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 100;}
+.carrito-badge { position: absolute; top: -5px; right: -5px; background: white; color: #e040fb; border-radius: 50%; font-size: 0.7rem; font-weight: bold; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;}
 
 /* ── Filtros ── */
 .filtros-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 32px; }

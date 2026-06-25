@@ -36,7 +36,12 @@ public class AuthController {
                         credenciales.get("password")
                 )
         );
-        String token = jwtUtil.generateToken(credenciales.get("email"));
-        return ResponseEntity.ok(Map.of("token", token));
+        String email = credenciales.get("email");
+        String token = jwtUtil.generateToken(email);
+        Usuario usuario = usuarioService.buscarPorEmail(email);
+        return ResponseEntity.ok(Map.of(
+                "token", token,
+                "rol", usuario.getRol().name()
+        ));
     }
 }

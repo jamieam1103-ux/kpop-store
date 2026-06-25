@@ -15,6 +15,7 @@ export interface ProductoBackend {
   descripcion: string;
   imagen: string;
   categoria: string;
+  subcategoria: string;
   variantes: VarianteBackend[];
 }
 
