@@ -3,6 +3,9 @@
   <div class="catalogo-header">
     <h1>✦ Catálogo</h1>
     <p>{{ productosFiltrados().length }} productos disponibles</p>
+    <a routerLink="/carrito" class="carrito-btn">
+      🛒 <span *ngIf="carritoService.cantidadTotal() > 0" class="carrito-badge">{{ carritoService.cantidadTotal() }}</span>
+    </a>
   </div>
 
   <!-- Filtros -->
@@ -32,9 +35,9 @@
       (click)="agregarAlCarrito(p)">
       <div class="producto-img-wrap">
         <img [src]="p.imagen || 'assets/placeholder.png'" [alt]="p.nombre" />
-        <span class="producto-tag" [class.tag-kpop]="p.categoria === 'K-POP'" [class.tag-anime]="p.categoria === 'ANIME'">
-          {{ p.categoria }}
-        </span>
+        <span class="producto-tag">
+  {{ p.subcategoria || p.categoria }}
+</span>
         <div class="producto-overlay">
           <span class="overlay-text">+ Agregar</span>
         </div>

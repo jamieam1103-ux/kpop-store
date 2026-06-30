@@ -8,16 +8,24 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String nombre;
+
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
+
     private String imagen;
+
     @Column(nullable = false)
     private String categoria;
+
+    @Column
+    private String subcategoria;
+
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @com.fasterxml.jackson.annotation.JsonIgnoreProperties("producto")
     private List<Variante> variantes;
-
 
     public Producto() {}
 
@@ -31,6 +39,8 @@ public class Producto {
     public void setImagen(String imagen) { this.imagen = imagen; }
     public String getCategoria() { return categoria; }
     public void setCategoria(String categoria) { this.categoria = categoria; }
+    public String getSubcategoria() { return subcategoria; }
+    public void setSubcategoria(String subcategoria) { this.subcategoria = subcategoria; }
     public List<Variante> getVariantes() { return variantes; }
     public void setVariantes(List<Variante> variantes) { this.variantes = variantes; }
 }

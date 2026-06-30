@@ -17,10 +17,10 @@
     <div class="carrito-items">
       <div class="carrito-item" *ngFor="let item of carritoService.items()">
         <div class="item-img">
-          <img src="assets/placeholder.png" alt="producto" />
+          <img [src]="item.imagen || 'assets/placeholder.png'" [alt]="item.productoNombre" />
         </div>
         <div class="item-info">
-          <h3>Variante #{{ item.varianteId }}</h3>
+          <h3>{{ item.productoNombre }}</h3>
           <p class="item-variante">{{ item.descripcion }}</p>
           <p class="item-precio">S/ {{ item.precio | number:'1.2-2' }}</p>
         </div>
@@ -41,7 +41,7 @@
         <h2>Resumen del pedido</h2>
         <div class="resumen-lineas">
           <div class="resumen-linea" *ngFor="let item of carritoService.items()">
-            <span>Variante #{{ item.varianteId }} × {{ item.cantidad }}</span>
+            <span>{{ item.productoNombre }} × {{ item.cantidad }}</span>
             <span>S/ {{ (item.precio * item.cantidad) | number:'1.2-2' }}</span>
           </div>
         </div>

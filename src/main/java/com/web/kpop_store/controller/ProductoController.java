@@ -73,6 +73,46 @@ public class ProductoController {
         return jikanService.buscarManga(nombre);
     }
 
+    @PostMapping("/jikan/importar/anime")
+    @PreAuthorize("hasRole('ADMIN')")
+    public Producto importarAnime(@RequestParam String nombre) {
+        Map resultado = jikanService.buscarAnime(nombre);
+        List<Map> data = (List<Map>) resultado.get("data");
+        if (data == null || data.isEmpty()) {
+            throw new RuntimeException("No se encontró el anime: " + nombre);
+        }
+        Map anime = data.get(0);
+        Map images = (Map) anime.get("images");
+        Map jpg = (Map) images.get("jpg");
+
+        Producto p = new Producto();
+        p.setNombre((String) anime.get("title"));
+        p.setDescripcion((String) anime.get("synopsis"));
+        p.setImagen((String) jpg.get("image_url"));
+        p.setCategoria("ANIME");
+        return productoService.guardar(p);
+    }
+
+    @PostMapping("/jikan/importar/manga")
+    @PreAuthorize("hasRole('ADMIN')")
+    public Producto importarManga(@RequestParam String nombre) {
+        Map resultado = jikanService.buscarManga(nombre);
+        List<Map> data = (List<Map>) resultado.get("data");
+        if (data == null || data.isEmpty()) {
+            throw new RuntimeException("No se encontró el manga: " + nombre);
+        }
+        Map manga = data.get(0);
+        Map images = (Map) manga.get("images");
+        Map jpg = (Map) images.get("jpg");
+
+        Producto p = new Producto();
+        p.setNombre((String) manga.get("title"));
+        p.setDescripcion((String) manga.get("synopsis"));
+        p.setImagen((String) jpg.get("image_url"));
+        p.setCategoria("MANGA");
+        return productoService.guardar(p);
+    }
+
     @GetMapping("/stock-bajo")
     @PreAuthorize("hasRole('ADMIN')")
     public List<Variante> stockBajo() {
