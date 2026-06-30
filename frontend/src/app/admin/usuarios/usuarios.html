@@ -1,0 +1,31 @@
+<div class="usuarios-page">
+  <h1>Gestión de Usuarios</h1>
+
+  <div *ngIf="cargando" class="spinner"></div>
+
+  <table class="usuarios-table" *ngIf="!cargando">
+    <thead>
+    <tr>
+      <th>#</th><th>Nombre</th><th>Email</th><th>Rol</th><th>Estado</th><th>Acción</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let u of usuarios">
+      <td>{{ u.id }}</td>
+      <td>{{ u.nombre }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.rol }}</td>
+      <td>
+          <span [class.activo]="u.activo" [class.inactivo]="!u.activo">
+            {{ u.activo ? 'Activo' : 'Inactivo' }}
+          </span>
+      </td>
+      <td>
+        <button (click)="toggle(u.id)">
+          {{ u.activo ? 'Desactivar' : 'Activar' }}
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

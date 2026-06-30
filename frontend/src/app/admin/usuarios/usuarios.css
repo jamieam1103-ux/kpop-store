@@ -1,0 +1,101 @@
+.usuarios-page {
+  padding: 40px;
+  min-height: 100vh;
+  background: #0d0d0d;
+  color: white;
+}
+
+.usuarios-page h1 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  background: linear-gradient(90deg, #c850c0, #ff2d78);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #333;
+  border-top-color: #c850c0;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 60px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.usuarios-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #2a2a2a;
+}
+
+.usuarios-table thead {
+  background: #1f1f1f;
+}
+
+.usuarios-table th {
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #aaa;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.usuarios-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #232323;
+  font-size: 0.95rem;
+}
+
+.usuarios-table tbody tr:hover {
+  background: #202020;
+}
+
+.usuarios-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.activo {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.inactivo {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.usuarios-table button {
+  background: linear-gradient(90deg, #c850c0, #ff2d78);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.usuarios-table button:hover {
+  opacity: 0.85;
+}

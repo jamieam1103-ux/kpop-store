@@ -26,6 +26,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new User(
                 usuario.getEmail(),
                 usuario.getPassword(),
+                usuario.isActivo(),  // enabled
+                true,                // accountNonExpired
+                true,                // credentialsNonExpired
+                true,                // accountNonLocked
                 List.of(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().name()))
         );
     }

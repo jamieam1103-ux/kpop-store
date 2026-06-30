@@ -6,6 +6,13 @@ export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 
   {
+    path: 'admin/usuarios',
+    canActivate: [adminGuard],
+    loadComponent: () => import('./admin/usuarios/usuarios')
+      .then(m => m.UsuariosComponent)
+  },
+
+  {
     path: 'login',
     loadComponent: () => import('./login/login')
       .then(m => m.LoginComponent)
