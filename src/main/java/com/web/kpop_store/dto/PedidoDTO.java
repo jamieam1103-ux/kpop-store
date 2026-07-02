@@ -11,6 +11,7 @@ public class PedidoDTO {
     private String estado;
     private Double total;
     private List<DetallePedidoDTO> detalles;
+    private String usuarioEmail;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -26,4 +27,6 @@ public class PedidoDTO {
     public void setTotal(Double total) { this.total = total; }
     public List<DetallePedidoDTO> getDetalles() { return detalles; }
     public void setDetalles(List<DetallePedidoDTO> detalles) { this.detalles = detalles; }
+    public String getUsuarioEmail() { return usuarioEmail; }
+    public void setUsuarioEmail(String usuarioEmail) { this.usuarioEmail = usuarioEmail; }
 }
