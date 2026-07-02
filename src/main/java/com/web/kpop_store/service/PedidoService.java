@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class PedidoService {
 
     private final PedidoRepository pedidoRepository;
@@ -23,8 +25,14 @@ public class PedidoService {
     }
 
     public PedidoDTO crear(PedidoDTO dto) {
-        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Usuario usuario;
+        if (dto.getUsuarioEmail() != null) {
+            usuario = usuarioRepository.findByEmail(dto.getUsuarioEmail())
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        } else {
+            usuario = usuarioRepository.findById(dto.getUsuarioId())
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        }
 
         Pedido pedido = new Pedido();
         pedido.setUsuario(usuario);

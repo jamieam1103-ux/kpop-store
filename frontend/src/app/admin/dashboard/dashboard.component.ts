@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { PedidoService, PedidoDTO } from '../../services/pedido.service';
@@ -10,20 +10,26 @@ import { PedidoService, PedidoDTO } from '../../services/pedido.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-
 export class DashboardComponent implements OnInit {
   pedidos: PedidoDTO[] = [];
   cargando = true;
 
-  constructor(private pedidoService: PedidoService) {}
+  constructor(
+    private pedidoService: PedidoService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.pedidoService.listarPedidos().subscribe({
       next: (data: PedidoDTO[]) => {
         this.pedidos = data;
         this.cargando = false;
+        this.cdr.detectChanges();
       },
-      error: () => { this.cargando = false; }
+      error: () => {
+        this.cargando = false;
+        this.cdr.detectChanges();
+      }
     });
   }
 
@@ -40,6 +46,7 @@ export class DashboardComponent implements OnInit {
       next: (actualizado: PedidoDTO) => {
         const idx = this.pedidos.findIndex(p => p.id === id);
         if (idx !== -1) this.pedidos[idx] = actualizado;
+        this.cdr.detectChanges();
       }
     });
   }

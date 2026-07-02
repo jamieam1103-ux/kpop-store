@@ -41,7 +41,9 @@ public class AuthController {
         Usuario usuario = usuarioService.buscarPorEmail(email);
         return ResponseEntity.ok(Map.of(
                 "token", token,
-                "rol", usuario.getRol().name()
+                "rol", usuario.getRol().name(),
+                "email", email,
+                "usuarioId", String.valueOf(usuario.getId())
         ));
     }
 }

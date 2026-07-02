@@ -20,6 +20,14 @@
 .search-input::placeholder { color: #9880B0; }
 .search-input:focus { border-color: #FF2D78; box-shadow: 0 0 0 3px rgba(255,45,120,0.1); }
 
+/* ── Historial ── */
+.historial-btn { position: fixed; top: 20px; right: 95px; color: #FF2D78; text-decoration: none; font-weight: 700; font-size: 13px; padding: 8px 16px; border: 1px solid rgba(255,45,120,0.3); border-radius: 10px; background: #1A1A24; z-index: 100; transition: 0.2s; }
+.historial-btn:hover { background: rgba(255,45,120,0.1); border-color: #FF2D78; }
+
+/* ── Login ──*/
+.logout-btn { position: fixed; top: 20px; right: 260px; background: transparent; border: 1px solid rgba(255,45,120,0.3); color: #FF2D78; padding: 8px 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; z-index: 100; transition: 0.2s; }
+.logout-btn:hover { background: rgba(255,45,120,0.1); border-color: #FF2D78; }
+
 /* ── Grid ── */
 .productos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
 
