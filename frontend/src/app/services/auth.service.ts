@@ -15,6 +15,8 @@ export class AuthService {
       tap((res: any) => {
         localStorage.setItem('token', res.token);
         localStorage.setItem('rol', res.rol);
+        localStorage.setItem('email', res.email);
+        localStorage.setItem('usuarioId', res.usuarioId);
       })
     );
   }

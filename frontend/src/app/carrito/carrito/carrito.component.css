@@ -51,4 +51,3 @@
 .kpop-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(255,45,120,0.3); }
 .kpop-btn-outline { display: inline-flex; align-items: center; padding: 12px 28px; background: transparent; border: 1.5px solid #FF2D78; color: #FF2D78; font-weight: 700; font-size: 14px; border-radius: 12px; cursor: pointer; transition: 0.25s; }
 .kpop-btn-outline:hover { background: #FF2D78; color: #fff; }
-

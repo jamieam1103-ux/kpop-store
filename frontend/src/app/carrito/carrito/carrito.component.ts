@@ -19,27 +19,32 @@ export class CarritoComponent {
   constructor(
     public carritoService: CarritoService,
     private pedidoService: PedidoService
-  ) {}
+  ) { }
 
   confirmarPedido() {
     if (this.carritoService.items().length === 0) return;
     this.cargando = true;
 
     const pedido = {
+      usuarioId: 0,
+      estado: 'PENDIENTE',
       detalles: this.carritoService.items().map((i: any) => ({
         varianteId: i.varianteId,
         cantidad: i.cantidad
       }))
     };
 
-    (this.pedidoService as any).crearPedido(pedido).subscribe({
+    this.pedidoService.crearPedido(pedido as any).subscribe({
       next: (resp: any) => {
         this.pedidoId = resp.id;
         this.pedidoConfirmado = true;
         this.carritoService.limpiar();
         this.cargando = false;
       },
-      error: () => { this.cargando = false; }
+      error: (err) => {
+        console.error('Error al confirmar pedido:', err);
+        this.cargando = false;
+      }
     });
   }
 }

@@ -11,7 +11,18 @@ export interface ItemCarrito {
 
 @Injectable({ providedIn: 'root' })
 export class CarritoService {
-  private _items = signal<ItemCarrito[]>([]);
+  private _items = signal<ItemCarrito[]>(this.cargarStorage());
+
+  private cargarStorage(): ItemCarrito[] {
+    try {
+      const data = localStorage.getItem('carrito');
+      return data ? JSON.parse(data) : [];
+    } catch { return []; }
+  }
+
+  private guardarStorage(items: ItemCarrito[]) {
+    localStorage.setItem('carrito', JSON.stringify(items));
+  }
 
   items = this._items.asReadonly();
 
@@ -26,30 +37,33 @@ export class CarritoService {
   agregar(item: ItemCarrito) {
     const actual = this._items();
     const existe = actual.find(i => i.varianteId === item.varianteId);
+    let nuevo;
     if (existe) {
-      this._items.set(
-        actual.map(i => i.varianteId === item.varianteId
-          ? { ...i, cantidad: i.cantidad + 1 }
-          : i
-        )
-      );
+      nuevo = actual.map(i => i.varianteId === item.varianteId
+        ? { ...i, cantidad: i.cantidad + 1 } : i);
     } else {
-      this._items.set([...actual, { ...item, cantidad: 1 }]);
+      nuevo = [...actual, { ...item, cantidad: 1 }];
     }
+    this._items.set(nuevo);
+    this.guardarStorage(nuevo);
   }
 
   eliminar(varianteId: number) {
-    this._items.set(this._items().filter(i => i.varianteId !== varianteId));
+    const nuevo = this._items().filter(i => i.varianteId !== varianteId);
+    this._items.set(nuevo);
+    this.guardarStorage(nuevo);
   }
 
   cambiarCantidad(varianteId: number, cantidad: number) {
     if (cantidad <= 0) { this.eliminar(varianteId); return; }
-    this._items.set(
-      this._items().map(i =>
-        i.varianteId === varianteId ? { ...i, cantidad } : i
-      )
-    );
+    const nuevo = this._items().map(i =>
+      i.varianteId === varianteId ? { ...i, cantidad } : i);
+    this._items.set(nuevo);
+    this.guardarStorage(nuevo);
   }
 
-  limpiar() { this._items.set([]); }
+  limpiar() {
+    this._items.set([]);
+    localStorage.removeItem('carrito');
+  }
 }

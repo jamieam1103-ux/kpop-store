@@ -1,11 +1,13 @@
 package com.web.kpop_store.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.web.kpop_store.entity.Producto;
 import com.web.kpop_store.entity.Variante;
 import com.web.kpop_store.repository.ProductoRepository;
 import com.web.kpop_store.repository.VarianteRepository;
-import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class ProductoService {
@@ -25,6 +27,7 @@ public class ProductoService {
     }
     public List<Producto> buscarPorCategoria(String categoria) { return productoRepository.findByCategoria(categoria); }
     public List<Producto> buscarPorNombre(String nombre) { return productoRepository.buscarPorNombre(nombre); }
+
     public Producto guardar(Producto producto) { return productoRepository.save(producto); }
 
     public Producto actualizar(Long id, Producto productoNuevo) {
