@@ -1,0 +1,6 @@
+.carrito-btn { position: fixed; top: 20px; right: 30px; font-size: 1.8rem; background: #e040fb; border-radius: 50%; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 100;}
+.carrito-badge { position: absolute; top: -5px; right: -5px; background: white; color: #e040fb; border-radius: 50%; font-size: 0.7rem; font-weight: bold; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;}
+.historial-btn { position: fixed; top: 20px; right: 95px; color: #FF2D78; text-decoration: none; font-weight: 700; font-size: 13px; padding: 8px 16px; border: 1px solid rgba(255,45,120,0.3); border-radius: 10px; background: #1A1A24; z-index: 100; transition: 0.2s; }
+.historial-btn:hover { background: rgba(255,45,120,0.1); border-color: #FF2D78; }
+.logout-btn { position: fixed; top: 20px; right: 260px; background: transparent; border: 1px solid rgba(255,45,120,0.3); color: #FF2D78; padding: 8px 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; z-index: 100; transition: 0.2s; }
+.logout-btn:hover { background: rgba(255,45,120,0.1); border-color: #FF2D78; }
