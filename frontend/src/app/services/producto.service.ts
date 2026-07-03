@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 
 export interface VarianteBackend {
   id: number;
@@ -21,7 +23,7 @@ export interface ProductoBackend {
 
 @Injectable({ providedIn: 'root' })
 export class ProductoService {
-  private url = 'http://localhost:8080/api/productos';
+  private url = `${environment.apiUrl}/api/productos`;
 
   constructor(private http: HttpClient) {}
 

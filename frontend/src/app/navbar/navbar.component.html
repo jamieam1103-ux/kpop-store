@@ -1,0 +1,5 @@
+<a routerLink="/pedidos/historial" class="historial-btn">📋 Mis pedidos</a>
+<button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+<a routerLink="/carrito" class="carrito-btn">
+  🛒 <span *ngIf="carritoService.cantidadTotal() > 0" class="carrito-badge">{{ carritoService.cantidadTotal() }}</span>
+</a>

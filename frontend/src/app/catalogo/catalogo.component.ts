@@ -5,6 +5,7 @@ import { CarritoService } from '../services/carrito.service';
 import { ProductoService, ProductoBackend } from '../services/producto.service';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 export interface Producto {
   id: number;
@@ -20,7 +21,7 @@ export interface Producto {
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, NavbarComponent],
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.css']
 })
