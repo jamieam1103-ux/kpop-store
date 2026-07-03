@@ -22,7 +22,7 @@ export interface PedidoDTO {
 @Injectable({ providedIn: 'root' })
 export class PedidoService {
   private http = inject(HttpClient);
-  private url = 'http://localhost:8080/api/pedidos';
+  private url = `${environment.apiUrl}/api/pedidos`;
 
   private headers() {
     const token = localStorage.getItem('token');

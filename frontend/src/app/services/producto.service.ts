@@ -21,7 +21,7 @@ export interface ProductoBackend {
 
 @Injectable({ providedIn: 'root' })
 export class ProductoService {
-  private url = 'http://localhost:8080/api/productos';
+  private url = `${environment.apiUrl}/api/productos`;
 
   constructor(private http: HttpClient) {}
 

@@ -12,7 +12,7 @@ export interface Usuario {
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioService {
-  private url = 'http://localhost:8080/api/admin/usuarios';
+  private url = `${environment.apiUrl}/api/admin/usuarios`;
 
   constructor(private http: HttpClient) {}
 
