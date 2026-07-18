@@ -37,7 +37,6 @@ export class CatalogoComponent implements OnInit {
 
   private productos = signal<Producto[]>([]);
 
-  // Subcategorías disponibles según la categoría principal elegida
   subcategoriasDisponibles(): string[] {
     const fuente = this.categoriaActiva === 'TODOS'
       ? this.productos()
@@ -51,4 +50,74 @@ export class CatalogoComponent implements OnInit {
       const coincideCategoria = this.categoriaActiva === 'TODOS' || p.categoria === this.categoriaActiva;
       const coincideSubcategoria = this.subcategoriaActiva === 'TODAS' || p.subcategoria === this.subcategoriaActiva;
       const coincideBusqueda = p.nombre.toLowerCase().includes(this.busqueda.toLowerCase());
-      return
+      return coincideCategoria && coincideSubcategoria && coincideBusqueda;
+    });
+  }
+
+  constructor(
+    public carritoService: CarritoService,
+    private productoService: ProductoService,
+    private authService: AuthService
+  ) {}
+
+  logout() {
+    this.authService.logout();
+  }
+
+  ngOnInit() {
+    this.cargando = true;
+    this.productoService.listar().subscribe({
+      next: (data: ProductoBackend[]) => {
+        const mapeados: Producto[] = data
+          .filter(p => p.variantes && p.variantes.length > 0)
+          .map(p => ({
+            id: p.id,
+            nombre: p.nombre,
+            descripcion: p.descripcion,
+            imagen: p.imagen,
+            categoria: p.categoria,
+            subcategoria: p.subcategoria,
+            precio: p.variantes[0].precio,
+            varianteId: p.variantes[0].id
+          }));
+        this.productos.set(mapeados);
+        this.cargando = false;
+      },
+      error: (err) => {
+        console.error('Error cargando productos:', err);
+        this.cargando = false;
+      }
+    });
+  }
+
+  filtrar(cat: string) {
+    this.categoriaActiva = cat;
+    this.subcategoriaActiva = 'TODAS';
+  }
+
+  subfiltrar(sub: string) { this.subcategoriaActiva = sub; }
+
+  limpiarFiltros() {
+    this.categoriaActiva = 'TODOS';
+    this.subcategoriaActiva = 'TODAS';
+    this.busqueda = '';
+  }
+
+  agregarAlCarrito(p: Producto) {
+    this.carritoService.agregar({
+      varianteId: p.varianteId,
+      productoNombre: p.nombre,
+      descripcion: p.descripcion ? p.descripcion.substring(0, 80) + '...' : '',
+      precio: p.precio,
+      imagen: p.imagen || '',
+      cantidad: 1
+    });
+    this.mostrarToast();
+  }
+
+  private mostrarToast() {
+    this.toastVisible = true;
+    clearTimeout(this.toastTimer);
+    this.toastTimer = setTimeout(() => this.toastVisible = false, 2200);
+  }
+}
