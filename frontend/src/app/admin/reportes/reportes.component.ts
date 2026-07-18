@@ -1,3 +1,4 @@
+import { NavbarComponent } from '../../navbar/navbar.component';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PedidoService } from '../../services/pedido.service';
@@ -5,7 +6,7 @@ import { PedidoService } from '../../services/pedido.service';
 @Component({
   selector: 'app-reportes',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NavbarComponent],
   templateUrl: './reportes.component.html',
   styleUrls: ['./reportes.component.css']
 })

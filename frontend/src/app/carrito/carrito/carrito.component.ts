@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../services/carrito.service';
 import { PedidoService } from '../../services/pedido.service';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, NavbarComponent],
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.css']
 })

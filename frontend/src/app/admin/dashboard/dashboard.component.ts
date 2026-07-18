@@ -1,3 +1,4 @@
+import { NavbarComponent } from '../../navbar/navbar.component';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -6,7 +7,7 @@ import { PedidoService, PedidoDTO } from '../../services/pedido.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink,NavbarComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

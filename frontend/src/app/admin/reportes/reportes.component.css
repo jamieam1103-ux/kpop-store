@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap');
-.reportes-page { max-width: 1300px; margin: 0 auto; padding: 40px 24px 80px; }
+.reportes-page { max-width: 1300px; margin: 0 auto; padding: 108px 24px 80px; }
 .dash-topbar { margin-bottom: 36px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,45,120,0.15); }
 .dash-topbar h1 { font-family: 'Bebas Neue', cursive; font-size: 52px; letter-spacing: 0.05em; line-height: 1; background: linear-gradient(135deg, #fff 40%, #FF2D78); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .dash-topbar p { color: #9880B0; margin-top: 6px; }

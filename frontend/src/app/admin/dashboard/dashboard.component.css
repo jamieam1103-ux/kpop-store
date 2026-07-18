@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap');
 .btn-secondary { color: #FF6FB5; text-decoration: none; font-weight: 600; margin-bottom: 16px; transition: 0.2s; }
 .btn-secondary:hover { color: #FF2D78; text-decoration: underline; }
-.dashboard-page { max-width: 1300px; margin: 0 auto; padding: 40px 24px 80px; }
+.dashboard-page { max-width: 1300px; margin: 0 auto; padding: 108px 24px 80px; }
 .dash-topbar { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 24px; margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid rgba(255,45,120,0.15); }
 .dash-topbar h1 { font-family: 'Bebas Neue', cursive; font-size: 52px; letter-spacing: 0.05em; line-height: 1; background: linear-gradient(135deg, #fff 40%, #FF2D78); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .dash-topbar > div:first-child p { color: #9880B0; margin-top: 6px; }
