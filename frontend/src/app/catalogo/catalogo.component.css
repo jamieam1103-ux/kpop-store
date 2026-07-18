@@ -15,8 +15,10 @@
 .filtro-btn { padding: 8px 20px; border-radius: 20px; border: 1.5px solid rgba(255,45,120,0.3); background: transparent; color: #9880B0; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; font-family: 'Space Mono', monospace; letter-spacing: 0.05em; }
 .filtro-btn:hover { border-color: #FF2D78; color: #FF2D78; }
 .filtro-btn.active { background: linear-gradient(135deg, #FF2D78, #7B2FBE); border-color: transparent; color: #fff; }
-.sub-filtros { margin-top: -18px; margin-bottom: 28px; }
-.filtro-btn.sub { padding: 5px 14px; font-size: 11px; opacity: 0.85; }
+.sub-filtros-wrap { display: flex; align-items: center; gap: 14px; margin-bottom: 32px; padding-top: 14px; border-top: 1px dashed rgba(255,45,120,0.15); }
+.sub-filtros-label { color: #9880B0; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+.sub-filtros { margin: 0; }
+.filtro-btn.sub { padding: 5px 14px; font-size: 11px; opacity: 0.85; border-style: dashed; }
 .search-wrap { margin-left: auto; }
 .search-input { background: #1A1A24; border: 1.5px solid rgba(255,45,120,0.2); border-radius: 10px; padding: 9px 16px; color: #F0E6FF; font-size: 13px; width: 220px; outline: none; transition: 0.2s; }
 .search-input::placeholder { color: #9880B0; }

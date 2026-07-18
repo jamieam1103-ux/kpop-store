@@ -25,14 +25,17 @@
     </div>
 
     <!-- Sub-filtros (solo si hay más de 1 subcategoría para elegir) -->
-    <div class="filtros-bar sub-filtros" *ngIf="subcategoriasDisponibles().length > 2">
-      <button
-        *ngFor="let sub of subcategoriasDisponibles()"
-        class="filtro-btn sub"
-        [class.active]="subcategoriaActiva === sub"
-        (click)="subfiltrar(sub)">
-        {{ sub }}
-      </button>
+    <div class="sub-filtros-wrap" *ngIf="subcategoriasDisponibles().length > 2">
+      <span class="sub-filtros-label">Filtrar por tipo</span>
+      <div class="filtros-bar sub-filtros">
+        <button
+          *ngFor="let sub of subcategoriasDisponibles()"
+          class="filtro-btn sub"
+          [class.active]="subcategoriaActiva === sub"
+          (click)="subfiltrar(sub)">
+          {{ sub }}
+        </button>
+      </div>
     </div>
 
     <!-- Grid de productos -->
