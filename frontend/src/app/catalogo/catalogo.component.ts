@@ -27,8 +27,9 @@ export interface Producto {
 })
 export class CatalogoComponent implements OnInit {
 
-  categorias = ['TODOS', 'K-POP', 'CDS', 'MANGA', 'MERCH'];
+  categorias = ['TODOS', 'K-POP', 'ANIME'];
   categoriaActiva = 'TODOS';
+  subcategoriaActiva = 'TODAS';
   busqueda = '';
   toastVisible = false;
   cargando = false;
@@ -36,72 +37,18 @@ export class CatalogoComponent implements OnInit {
 
   private productos = signal<Producto[]>([]);
 
+  // Subcategorías disponibles según la categoría principal elegida
+  subcategoriasDisponibles(): string[] {
+    const fuente = this.categoriaActiva === 'TODOS'
+      ? this.productos()
+      : this.productos().filter(p => p.categoria === this.categoriaActiva);
+    const unicas = Array.from(new Set(fuente.map(p => p.subcategoria).filter((s): s is string => !!s)));
+    return ['TODAS', ...unicas];
+  }
+
   productosFiltrados(): Producto[] {
     return this.productos().filter(p => {
       const coincideCategoria = this.categoriaActiva === 'TODOS' || p.categoria === this.categoriaActiva;
+      const coincideSubcategoria = this.subcategoriaActiva === 'TODAS' || p.subcategoria === this.subcategoriaActiva;
       const coincideBusqueda = p.nombre.toLowerCase().includes(this.busqueda.toLowerCase());
-      return coincideCategoria && coincideBusqueda;
-    });
-  }
-
-  constructor(
-    public carritoService: CarritoService,
-    private productoService: ProductoService,
-    private authService: AuthService
-  ) {}
-
-  logout() {
-    this.authService.logout();
-  }
-
-  ngOnInit() {
-    this.cargando = true;
-    this.productoService.listar().subscribe({
-      next: (data: ProductoBackend[]) => {
-        const mapeados: Producto[] = data
-          .filter(p => p.variantes && p.variantes.length > 0)
-          .map(p => ({
-            id: p.id,
-            nombre: p.nombre,
-            descripcion: p.descripcion,
-            imagen: p.imagen,
-            categoria: p.categoria,
-            subcategoria: p.subcategoria,
-            precio: p.variantes[0].precio,
-            varianteId: p.variantes[0].id
-          }));
-        this.productos.set(mapeados);
-        this.cargando = false;
-      },
-      error: (err) => {
-        console.error('Error cargando productos:', err);
-        this.cargando = false;
-      }
-    });
-  }
-
-  filtrar(cat: string) { this.categoriaActiva = cat; }
-
-  limpiarFiltros() {
-    this.categoriaActiva = 'TODOS';
-    this.busqueda = '';
-  }
-
-  agregarAlCarrito(p: Producto) {
-    this.carritoService.agregar({
-      varianteId: p.varianteId,
-      productoNombre: p.nombre,
-      descripcion: p.descripcion ? p.descripcion.substring(0, 80) + '...' : '',
-      precio: p.precio,
-      imagen: p.imagen || '',
-      cantidad: 1
-    });
-    this.mostrarToast();
-  }
-
-  private mostrarToast() {
-    this.toastVisible = true;
-    clearTimeout(this.toastTimer);
-    this.toastTimer = setTimeout(() => this.toastVisible = false, 2200);
-  }
-}
+      return

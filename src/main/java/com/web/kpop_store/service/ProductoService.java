@@ -35,6 +35,8 @@ public class ProductoService {
         producto.setNombre(productoNuevo.getNombre());
         producto.setDescripcion(productoNuevo.getDescripcion());
         producto.setCategoria(productoNuevo.getCategoria());
+        producto.setSubcategoria(productoNuevo.getSubcategoria());
+        producto.setSubcategoria(productoNuevo.getSubcategoria());
         producto.setImagen(productoNuevo.getImagen());
         return productoRepository.save(producto);
     }

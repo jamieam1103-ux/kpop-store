@@ -5,64 +5,75 @@
     <p>{{ productosFiltrados().length }} productos disponibles</p>
     <app-navbar></app-navbar>
 
-  <!-- Filtros -->
-  <div class="filtros-bar">
-    <button
-      *ngFor="let cat of categorias"
-      class="filtro-btn"
-      [class.active]="categoriaActiva === cat"
-      (click)="filtrar(cat)">
-      {{ cat }}
-    </button>
-    <div class="search-wrap">
-      <input
-        type="text"
-        placeholder="Buscar producto..."
-        class="search-input"
-        [(ngModel)]="busqueda"
-      />
+    <!-- Filtros -->
+    <div class="filtros-bar">
+      <button
+        *ngFor="let cat of categorias"
+        class="filtro-btn"
+        [class.active]="categoriaActiva === cat"
+        (click)="filtrar(cat)">
+        {{ cat }}
+      </button>
+      <div class="search-wrap">
+        <input
+          type="text"
+          placeholder="Buscar producto..."
+          class="search-input"
+          [(ngModel)]="busqueda"
+        />
+      </div>
     </div>
-  </div>
 
-  <!-- Grid de productos -->
-  <div class="productos-grid" *ngIf="productosFiltrados().length > 0">
-    <div
-      class="producto-card"
-      *ngFor="let p of productosFiltrados()"
-      (click)="agregarAlCarrito(p)">
-      <div class="producto-img-wrap">
-        <img [src]="p.imagen || 'assets/placeholder.png'" [alt]="p.nombre" />
-        <span class="producto-tag">
+    <!-- Sub-filtros (solo si hay más de 1 subcategoría para elegir) -->
+    <div class="filtros-bar sub-filtros" *ngIf="subcategoriasDisponibles().length > 2">
+      <button
+        *ngFor="let sub of subcategoriasDisponibles()"
+        class="filtro-btn sub"
+        [class.active]="subcategoriaActiva === sub"
+        (click)="subfiltrar(sub)">
+        {{ sub }}
+      </button>
+    </div>
+
+    <!-- Grid de productos -->
+    <div class="productos-grid" *ngIf="productosFiltrados().length > 0">
+      <div
+        class="producto-card"
+        *ngFor="let p of productosFiltrados()"
+        (click)="agregarAlCarrito(p)">
+        <div class="producto-img-wrap">
+          <img [src]="p.imagen || 'assets/placeholder.png'" [alt]="p.nombre" />
+          <span class="producto-tag" [ngClass]="p.categoria === 'K-POP' ? 'tag-kpop' : 'tag-anime'">
           {{ p.subcategoria || p.categoria }}
         </span>
-        <div class="producto-overlay">
-          <span class="overlay-text">+ Agregar</span>
+          <div class="producto-overlay">
+            <span class="overlay-text">+ Agregar</span>
+          </div>
         </div>
-      </div>
-      <div class="producto-info">
-        <h3>{{ p.nombre }}</h3>
-        <p class="producto-desc">{{ p.descripcion }}</p>
-        <div class="producto-footer">
-          <span class="producto-precio">S/ {{ p.precio | number:'1.2-2' }}</span>
-          <button class="add-btn" (click)="agregarAlCarrito(p); $event.stopPropagation()">
-            <span>＋</span>
-          </button>
+        <div class="producto-info">
+          <h3>{{ p.nombre }}</h3>
+          <p class="producto-desc">{{ p.descripcion }}</p>
+          <div class="producto-footer">
+            <span class="producto-precio">S/ {{ p.precio | number:'1.2-2' }}</span>
+            <button class="add-btn" (click)="agregarAlCarrito(p); $event.stopPropagation()">
+              <span>＋</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Empty state -->
-  <div class="empty-catalogo" *ngIf="productosFiltrados().length === 0">
-    <div class="empty-icon">🔍</div>
-    <h2>Sin resultados</h2>
-    <p>No encontramos productos con ese filtro</p>
-    <button class="kpop-btn" (click)="limpiarFiltros()">Ver todos</button>
-  </div>
+    <!-- Empty state -->
+    <div class="empty-catalogo" *ngIf="productosFiltrados().length === 0">
+      <div class="empty-icon">🔍</div>
+      <h2>Sin resultados</h2>
+      <p>No encontramos productos con ese filtro</p>
+      <button class="kpop-btn" (click)="limpiarFiltros()">Ver todos</button>
+    </div>
 
-  <!-- Toast de confirmación -->
-  <div class="toast" [class.show]="toastVisible">
-    ✔ Producto agregado al carrito
-  </div>
+    <!-- Toast de confirmación -->
+    <div class="toast" [class.show]="toastVisible">
+      ✔ Producto agregado al carrito
+    </div>
 
-</div>
+  </div>
