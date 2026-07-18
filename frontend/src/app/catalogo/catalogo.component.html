@@ -31,6 +31,7 @@
         <button
           *ngFor="let sub of subcategoriasDisponibles()"
           class="filtro-btn sub"
+          [ngClass]="claseSub(sub)"
           [class.active]="subcategoriaActiva === sub"
           (click)="subfiltrar(sub)">
           {{ sub }}

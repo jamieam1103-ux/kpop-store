@@ -45,6 +45,10 @@ export class CatalogoComponent implements OnInit {
     return ['TODAS', ...unicas];
   }
 
+  claseSub(sub: string): string {
+    return 'sub-' + sub.toLowerCase();
+  }
+
   productosFiltrados(): Producto[] {
     return this.productos().filter(p => {
       const coincideCategoria = this.categoriaActiva === 'TODOS' || p.categoria === this.categoriaActiva;
