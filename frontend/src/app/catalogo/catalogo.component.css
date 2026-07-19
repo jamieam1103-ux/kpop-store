@@ -17,27 +17,22 @@
 .sub-filtros-wrap { display: flex; align-items: center; gap: 14px; margin-bottom: 32px; padding-top: 14px; border-top: 1px dashed rgba(255,45,120,0.15); flex-wrap: wrap; }
 .sub-filtros-label { color: #9880B0; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
 .sub-filtros { margin: 0; }
-.filtro-btn.sub { padding: 7px 18px; font-size: 13px; border-width: 1.5px; border-style: solid; opacity: 1; }
-.filtro-btn.sub.sub-anime      { border-color: #7B2FBE; color: #B06EFF; }
+.filtro-btn.sub.sub-serie      { border-color: #7B2FBE; color: #B06EFF; }
 .filtro-btn.sub.sub-manga      { border-color: #3EA6FF; color: #6FC3FF; }
 .filtro-btn.sub.sub-poster     { border-color: #FFB020; color: #FFC960; }
-.filtro-btn.sub.sub-merch      { border-color: #34D399; color: #6FE8BC; }
+.filtro-btn.sub.sub-figura     { border-color: #34D399; color: #6FE8BC; }
 .filtro-btn.sub.sub-album      { border-color: #FF2D78; color: #FF6FA8; }
 .filtro-btn.sub.sub-cd         { border-color: #FF2D78; color: #FF8FBB; }
-.filtro-btn.sub.sub-lightstick { border-color: #FFD700; color: #FFE680; }
-.filtro-btn.sub.sub-photocard  { border-color: #FF7BC5; color: #FFB3E0; }
-.filtro-btn.sub.sub-ropa       { border-color: #64C8FF; color: #A0E0FF; }
-.filtro-btn.sub.sub-todas      { border-color: #9880B0; color: #C9BEDD; }
-.filtro-btn.sub.active.sub-anime      { background: #7B2FBE; color: #fff; }
+.filtro-btn.sub.sub-accesorios { border-color: #FFD700; color: #FFE680; }
+.filtro-btn.sub.sub-merch      { border-color: #64C8FF; color: #A0E0FF; }
+.filtro-btn.sub.active.sub-serie      { background: #7B2FBE; color: #fff; }
 .filtro-btn.sub.active.sub-manga      { background: #3EA6FF; color: #0A1A2A; }
 .filtro-btn.sub.active.sub-poster     { background: #FFB020; color: #2A1B00; }
-.filtro-btn.sub.active.sub-merch      { background: #34D399; color: #04241A; }
+.filtro-btn.sub.active.sub-figura     { background: #34D399; color: #04241A; }
 .filtro-btn.sub.active.sub-album      { background: #FF2D78; color: #fff; }
 .filtro-btn.sub.active.sub-cd         { background: #FF2D78; color: #fff; }
-.filtro-btn.sub.active.sub-lightstick { background: #FFD700; color: #2A2000; }
-.filtro-btn.sub.active.sub-photocard  { background: #FF7BC5; color: #3A0022; }
-.filtro-btn.sub.active.sub-ropa       { background: #64C8FF; color: #001A2A; }
-.filtro-btn.sub.active.sub-todas      { background: #9880B0; color: #16101F; }
+.filtro-btn.sub.active.sub-accesorios { background: #FFD700; color: #2A2000; }
+.filtro-btn.sub.active.sub-merch      { background: #64C8FF; color: #001A2A; }
 .search-wrap { margin-left: auto; }
 
 /* ── Historial ── */
@@ -60,15 +55,14 @@
 .producto-card:hover .producto-img-wrap img { transform: scale(1.06); }
 
 .producto-tag { position: absolute; top: 12px; left: 12px; font-size: 13px; font-weight: 700; padding: 7px 18px; border-radius: 20px; letter-spacing: 0.03em; }
-.producto-tag.sub-anime      { background: rgba(123,47,190,0.25); color: #C89BFF; border: 1.5px solid #7B2FBE; }
+.producto-tag.sub-serie      { background: rgba(123,47,190,0.25); color: #C89BFF; border: 1.5px solid #7B2FBE; }
 .producto-tag.sub-manga      { background: rgba(62,166,255,0.25); color: #8FD3FF; border: 1.5px solid #3EA6FF; }
 .producto-tag.sub-poster     { background: rgba(255,176,32,0.25); color: #FFD180; border: 1.5px solid #FFB020; }
-.producto-tag.sub-merch      { background: rgba(52,211,153,0.25); color: #8FF0CE; border: 1.5px solid #34D399; }
+.producto-tag.sub-figura     { background: rgba(52,211,153,0.25); color: #8FF0CE; border: 1.5px solid #34D399; }
 .producto-tag.sub-album      { background: rgba(255,45,120,0.25); color: #FF8FBB; border: 1.5px solid #FF2D78; }
 .producto-tag.sub-cd         { background: rgba(255,45,120,0.25); color: #FF8FBB; border: 1.5px solid #FF2D78; }
-.producto-tag.sub-lightstick { background: rgba(255,215,0,0.25); color: #FFEB99; border: 1.5px solid #FFD700; }
-.producto-tag.sub-photocard  { background: rgba(255,123,197,0.25); color: #FFD1EC; border: 1.5px solid #FF7BC5; }
-.producto-tag.sub-ropa       { background: rgba(100,200,255,0.25); color: #B8E8FF; border: 1.5px solid #64C8FF; }
+.producto-tag.sub-accesorios { background: rgba(255,215,0,0.25); color: #FFEB99; border: 1.5px solid #FFD700; }
+.producto-tag.sub-merch      { background: rgba(100,200,255,0.25); color: #B8E8FF; border: 1.5px solid #64C8FF; }
 
 .producto-overlay { position: absolute; inset: 0; background: rgba(255,45,120,0.18); display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.25s; }
 .producto-card:hover .producto-overlay { opacity: 1; }
