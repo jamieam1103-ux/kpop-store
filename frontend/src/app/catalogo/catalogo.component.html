@@ -47,7 +47,7 @@
         (click)="agregarAlCarrito(p)">
         <div class="producto-img-wrap">
           <img [src]="p.imagen || 'assets/placeholder.png'" [alt]="p.nombre" />
-          <span class="producto-tag" [ngClass]="p.categoria === 'K-POP' ? 'tag-kpop' : 'tag-anime'">
+          <span class="producto-tag" [ngClass]="claseSub(p.subcategoria || p.categoria)">
           {{ p.subcategoria || p.categoria }}
         </span>
           <div class="producto-overlay">

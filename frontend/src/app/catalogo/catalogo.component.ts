@@ -41,8 +41,7 @@ export class CatalogoComponent implements OnInit {
     const fuente = this.categoriaActiva === 'TODOS'
       ? this.productos()
       : this.productos().filter(p => p.categoria === this.categoriaActiva);
-    const unicas = Array.from(new Set(fuente.map(p => p.subcategoria).filter((s): s is string => !!s)));
-    return ['TODAS', ...unicas];
+    return Array.from(new Set(fuente.map(p => p.subcategoria).filter((s): s is string => !!s)));
   }
 
   claseSub(sub: string): string {
@@ -99,7 +98,9 @@ export class CatalogoComponent implements OnInit {
     this.subcategoriaActiva = 'TODAS';
   }
 
-  subfiltrar(sub: string) { this.subcategoriaActiva = sub; }
+  subfiltrar(sub: string) {
+    this.subcategoriaActiva = (this.subcategoriaActiva === sub) ? 'TODAS' : sub;
+  }
 
   limpiarFiltros() {
     this.categoriaActiva = 'TODOS';
