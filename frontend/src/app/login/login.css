@@ -13,21 +13,21 @@
   background: #1A1A24;
   border: 1px solid rgba(255,45,120,0.25);
   border-radius: 20px;
-  padding: 48px 40px;
+  padding: 40px 40px 44px;
   width: 100%;
   max-width: 420px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   box-shadow: 0 8px 40px rgba(255,45,120,0.1);
 }
 
 h1 {
   font-family: 'Bebas Neue', cursive;
-  font-size: 42px;
+  font-size: 40px;
   letter-spacing: 0.06em;
+  line-height: 1;
   text-align: center;
-  margin-bottom: 0;
+  margin: 0;
   background: linear-gradient(135deg, #fff 40%, #FF2D78);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -36,13 +36,13 @@ h1 {
   justify-content: center;
   gap: 10px;
 }
-.brand-icon { -webkit-text-fill-color: #FF2D78; }
+.brand-icon { -webkit-text-fill-color: #FF2D78; font-size: 32px; }
 
 .login-subtitle {
   text-align: center;
   color: #9880B0;
   font-size: 13px;
-  margin-bottom: 8px;
+  margin: 10px 0 28px;
 }
 
 .tabs {
@@ -51,6 +51,7 @@ h1 {
   background: #111118;
   padding: 4px;
   border-radius: 12px;
+  margin-bottom: 24px;
 }
 
 .tabs button {
@@ -71,6 +72,20 @@ h1 {
   color: white;
 }
 
+.error-msg {
+  color: #FF4560;
+  text-align: center;
+  font-size: 13px;
+  background: rgba(255,69,96,0.1);
+  border: 1px solid rgba(255,69,96,0.3);
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+/* Contenedores de inputs+boton (login/registro) con su propio espaciado interno */
+.form-group { display: flex; flex-direction: column; gap: 14px; }
+
 input {
   width: 100%;
   padding: 13px 16px;
@@ -88,6 +103,7 @@ input:focus {
   box-shadow: 0 0 0 3px rgba(255,45,120,0.12);
 }
 input::placeholder { color: #6B6080; }
+input + input { margin-top: 0; }
 
 .btn-primary {
   width: 100%;
@@ -99,20 +115,10 @@ input::placeholder { color: #6B6080; }
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 8px;
+  margin-top: 6px;
   transition: 0.25s;
 }
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255,45,120,0.35);
-}
-
-.error-msg {
-  color: #FF4560;
-  text-align: center;
-  font-size: 13px;
-  background: rgba(255,69,96,0.1);
-  border: 1px solid rgba(255,69,96,0.3);
-  border-radius: 8px;
-  padding: 8px;
 }
