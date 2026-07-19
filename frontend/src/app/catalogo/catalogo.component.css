@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap');
 
 /* ── Page ── */
-.catalogo-page { max-width: 1200px; margin: 0 auto; padding: 108px 24px 80px; min-height: 80vh; }
+.catalogo-page { max-width: 1200px; margin: 0 auto; padding: 92px 24px 80px; min-height: 80vh; }
 /* ── Header ── */
 .catalogo-header { margin-bottom: 36px; }
 .catalogo-header h1 { font-family: 'Bebas Neue', cursive; font-size: 48px; letter-spacing: 0.05em; background: linear-gradient(135deg, #fff 40%, #FF2D78); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
