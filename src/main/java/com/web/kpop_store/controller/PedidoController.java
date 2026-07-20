@@ -27,9 +27,14 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<PedidoDTO> crear(@RequestBody PedidoDTO dto, java.security.Principal principal) {
+    public ResponseEntity<?> crear(@RequestBody PedidoDTO dto, java.security.Principal principal) {
         dto.setUsuarioEmail(principal.getName());
-        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoService.crear(dto));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(pedidoService.crear(dto));
+        } catch (com.web.kpop_store.service.StockInsuficienteException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(java.util.Map.of("mensaje", e.getMessage()));
+        }
     }
 
     @GetMapping

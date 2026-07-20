@@ -1,0 +1,69 @@
+.productos-page { padding: 40px; min-height: 100vh; background: #0d0d0d; color: white; }
+.btn-secondary { display: inline-block; color: #ccc; text-decoration: none; margin-bottom: 20px; font-size: 0.9rem; }
+.btn-secondary:hover { color: white; }
+.header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+.header-row h1 { font-size: 2rem; margin: 0 0 4px; background: linear-gradient(90deg, #c850c0, #ff2d78); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+.header-row p { color: #aaa; margin: 0; }
+.btn-nuevo { background: linear-gradient(90deg, #c850c0, #ff2d78); color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: opacity 0.2s; }
+.btn-nuevo:hover { opacity: 0.85; }
+.spinner { width: 40px; height: 40px; border: 4px solid #333; border-top-color: #c850c0; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 60px auto; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.productos-table-wrap { overflow-x: auto; }
+.productos-table { width: 100%; border-collapse: collapse; background: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid #2a2a2a; }
+.productos-table thead { background: #1f1f1f; }
+.productos-table th { text-align: left; padding: 14px 18px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: #aaa; border-bottom: 1px solid #2a2a2a; }
+.productos-table td { padding: 14px 18px; border-bottom: 1px solid #232323; font-size: 0.95rem; }
+.productos-table tbody tr:hover { background: #202020; }
+.productos-table tbody tr:last-child td { border-bottom: none; }
+.producto-cell { display: flex; align-items: center; gap: 10px; }
+.producto-cell img { width: 40px; height: 40px; object-fit: cover; border-radius: 6px; background: #2a2a2a; }
+.stock-bajo { color: #f87171; font-weight: 700; }
+.acciones-cell { display: flex; gap: 8px; }
+.btn-editar, .btn-eliminar { border: none; padding: 7px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: opacity 0.2s; }
+.btn-editar { background: linear-gradient(90deg, #c850c0, #ff2d78); color: white; }
+.btn-eliminar { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+.btn-editar:hover, .btn-eliminar:hover { opacity: 0.85; }
+.empty-state { text-align: center; padding: 60px 20px; color: #aaa; }
+.empty-state .icon { font-size: 3rem; margin-bottom: 10px; }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+.modal-card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 14px; padding: 28px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; }
+.modal-card h2 { margin: 0 0 20px; font-size: 1.3rem; }
+.modal-card label { display: block; font-size: 0.85rem; color: #aaa; margin: 14px 0 6px; }
+.modal-card input, .modal-card textarea, .modal-card select { width: 100%; background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 8px; padding: 10px 12px; color: white; font-size: 0.95rem; box-sizing: border-box; }
+.modal-card textarea { resize: vertical; font-family: inherit; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-row--3 { grid-template-columns: 1fr 1fr 1fr; }
+.modal-acciones { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
+.btn-cancelar, .btn-guardar { border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; }
+.btn-cancelar { background: #2a2a2a; color: white; }
+.btn-guardar { background: linear-gradient(90deg, #c850c0, #ff2d78); color: white; }
+.btn-cancelar:disabled, .btn-guardar:disabled { opacity: 0.6; cursor: not-allowed; }
+@media (max-width: 600px) { .form-row, .form-row--3 { grid-template-columns: 1fr; } }
+
+/* --- Buscador Jikan (solo visible cuando categoría=ANIME y subcategoría=MANGA) --- */
+.jikan-search-box { margin: 14px 0 20px; padding: 14px 16px; background: #141414; border: 1px solid #2a2a2a; border-left: 3px solid #ff2d78; border-radius: 10px; }
+.jikan-search-box label { margin-top: 0; }
+.jikan-search-row { display: flex; gap: 8px; }
+.jikan-search-row input {  flex: 1; width: auto; }
+.btn-jikan-buscar { background: linear-gradient(90deg, #c850c0, #ff2d78); color: white; border: none; padding: 0 18px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600; white-space: nowrap; transition: opacity 0.2s; }
+.btn-jikan-buscar:hover:not(:disabled) { opacity: 0.85; }
+.btn-jikan-buscar:disabled { opacity: 0.5; cursor: not-allowed; }
+.jikan-resultados { margin-top: 12px; max-height: 220px; overflow-y: auto; border: 1px solid #2a2a2a; border-radius: 8px; background: #0d0d0d; }
+.jikan-resultado-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; cursor: pointer; border-bottom: 1px solid #232323; transition: background 0.15s; }
+.jikan-resultado-item:last-child { border-bottom: none; }
+.jikan-resultado-item:hover { background: #202020; }
+.jikan-resultado-item img { width: 34px; height: 34px; object-fit: cover; border-radius: 6px; background: #2a2a2a; flex-shrink: 0; }
+.jikan-resultado-item span { font-size: 0.9rem; color: white; }
+.jikan-sin-resultados { margin-top: 10px; font-size: 0.85rem; color: #888; font-style: italic; }
+
+/* Toast de confirmación */
+.toast { position: fixed; bottom: 32px; right: 32px; background: linear-gradient(135deg, #FF2D78, #7B2FBE); color: #fff; font-size: 13px; font-weight: 700; padding: 12px 22px; border-radius: 12px; box-shadow: 0 6px 24px rgba(255, 45, 120, 0.35); opacity: 0; transform: translateY(10px); transition: 0.3s ease; pointer-events: none; z-index: 999; }
+.toast.show { opacity: 1; transform: translateY(0); }
+
+.modal-card--small { max-width: 380px; text-align: center; }
+.modal-icon { font-size: 2.5rem; margin-bottom: 8px; }
+.modal-texto { color: #ccc; font-size: 0.95rem; line-height: 1.5; margin: 10px 0 0; }
+.modal-texto strong { color: white; }
+.modal-acciones--center { justify-content: center; }
+.btn-eliminar-confirm { border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; background: #f87171; color: #1a0000; }
+.btn-eliminar-confirm:hover { opacity: 0.85; }

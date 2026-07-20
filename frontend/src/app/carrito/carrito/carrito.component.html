@@ -55,6 +55,7 @@
           <span *ngIf="!cargando">✨ Confirmar Pedido</span>
           <span *ngIf="cargando">Procesando...</span>
         </button>
+        <p class="error-msg" *ngIf="errorMensaje">⚠️ {{ errorMensaje }}</p>
         <button class="clear-btn" (click)="carritoService.limpiar()">Vaciar carrito</button>
         <p class="secure-msg">🔒 Pago 100% seguro con JWT</p>
       </div>

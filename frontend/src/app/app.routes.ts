@@ -52,5 +52,12 @@ export const routes: Routes = [
       .then(m => m.ReportesComponent)
   },
 
+  {
+    path: 'admin/productos',
+    canActivate: [adminGuard],
+    loadComponent: () => import('./admin/productos/productos.component')
+      .then(m => m.AdminProductosComponent)
+  },
+
   { path: '**', redirectTo: '/login' }
 ];
