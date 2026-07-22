@@ -3,14 +3,18 @@
     <span class="brand-icon">✦</span> KPOP STORE
   </a>
   <div class="navbar-actions">
-    <a routerLink="/pedidos/historial" class="historial-btn">
-      <span class="btn-icon">📋</span> Mis pedidos
-    </a>
-    <button class="logout-btn" (click)="logout()">
-      <span class="btn-icon">🚪</span> Cerrar Sesión
-    </button>
-    <a routerLink="/carrito" class="carrito-btn">
-      🛒 <span *ngIf="carritoService.cantidadTotal() > 0" class="carrito-badge">{{ carritoService.cantidadTotal() }}</span>
-    </a>
+    <ng-container *ngIf="!modoAdmin">
+      <a routerLink="/pedidos/historial" class="historial-btn">📋 Mis pedidos</a>
+      <a routerLink="/carrito" class="carrito-btn">
+        🛒 <span *ngIf="carritoService.cantidadTotal() > 0" class="carrito-badge">{{ carritoService.cantidadTotal() }}</span>
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="modoAdmin">
+      <a routerLink="/admin/productos" class="historial-btn">📦 Gestión de Productos</a>
+      <a routerLink="/admin/usuarios" class="historial-btn">👥 Gestión de Usuarios</a>
+    </ng-container>
+
+    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
   </div>
 </nav>

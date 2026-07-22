@@ -57,8 +57,14 @@ public class ProductoController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
-        productoService.eliminar(id);
-        return ResponseEntity.ok("Producto eliminado");
+        try {
+            productoService.eliminar(id);
+            return ResponseEntity.ok(java.util.Map.of("mensaje", "Producto eliminado"));
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            return ResponseEntity.status(409).body(java.util.Map.of(
+                    "mensaje", "No se puede eliminar: este producto ya tiene pedidos registrados."
+            ));
+        }
     }
 
     @GetMapping("/jikan/anime")

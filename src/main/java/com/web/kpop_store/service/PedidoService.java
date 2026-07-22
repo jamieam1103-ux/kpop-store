@@ -42,6 +42,15 @@ public class PedidoService {
         List<DetallePedido> detalles = dto.getDetalles().stream().map(d -> {
             Variante v = varianteRepository.findById(d.getVarianteId())
                     .orElseThrow(() -> new RuntimeException("Variante no encontrada"));
+
+            if (v.getStock() < d.getCantidad()) {
+                String nombreProducto = v.getProducto() != null ? v.getProducto().getNombre() : "producto";
+                throw new StockInsuficienteException(
+                        "Stock insuficiente para \"" + nombreProducto + "\" (" + v.getDescripcion() + "). "
+                                + "Disponible: " + v.getStock() + ", solicitado: " + d.getCantidad()
+                );
+            }
+
             v.setStock(v.getStock() - d.getCantidad());
             varianteRepository.save(v);
 

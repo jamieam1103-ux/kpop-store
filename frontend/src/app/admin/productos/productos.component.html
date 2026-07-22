@@ -1,0 +1,171 @@
+<div class="productos-page">
+  <a routerLink="/admin" class="btn-secondary">&larr; Volver al panel</a>
+
+  <div class="header-row">
+    <div>
+      <h1>Gestión de Productos</h1>
+      <p>{{ productos.length }} productos en el catálogo</p>
+    </div>
+    <button class="btn-nuevo" (click)="abrirNuevo()">+ Nuevo producto</button>
+  </div>
+
+  <div *ngIf="cargando" class="spinner"></div>
+
+  <div *ngIf="!cargando && productos.length === 0" class="empty-state">
+    <div class="icon">📦</div>
+    <h3>Sin productos</h3>
+    <p>Todavía no hay productos registrados en el catálogo</p>
+  </div>
+
+  <div class="productos-table-wrap" *ngIf="!cargando && productos.length > 0">
+    <table class="productos-table">
+      <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Categoría</th>
+        <th>Subcategoría</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>
+          <div class="producto-cell">
+            <img [src]="producto.imagen" [alt]="producto.nombre" />
+            <span>{{ producto.nombre }}</span>
+          </div>
+        </td>
+        <td>{{ producto.categoria }}</td>
+        <td>{{ producto.subcategoria || '—' }}</td>
+        <td>S/ {{ (precioDe(producto) ?? 0) | number:'1.2-2' }}</td>
+        <td [class.stock-bajo]="stockBajo(producto)">{{ stockDe(producto) ?? 0 }}</td>
+        <td class="acciones-cell">
+          <button class="btn-editar" (click)="editar(producto)">Editar</button>
+          <button class="btn-eliminar" (click)="pedirConfirmacionEliminar(producto)">Eliminar</button>
+          <!-- Modal de confirmación para eliminar -->
+          <div class="modal-overlay" *ngIf="confirmEliminarVisible" (click)="cancelarEliminar()">
+            <div class="modal-card modal-card--small" (click)="$event.stopPropagation()">
+              <div class="modal-icon modal-icon--warning">⚠️</div>
+              <h2>¿Eliminar producto?</h2>
+              <p class="modal-texto">
+                ¿Seguro que quieres eliminar <strong>"{{ productoAEliminar?.nombre }}"</strong>?
+                Esta acción no se puede deshacer.
+              </p>
+              <div class="modal-acciones modal-acciones--center">
+                <button class="btn-cancelar" (click)="cancelarEliminar()">Cancelar</button>
+                <button class="btn-eliminar-confirm" (click)="confirmarEliminar()">Sí, eliminar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal de error al eliminar -->
+          <div class="modal-overlay" *ngIf="errorEliminarVisible" (click)="cerrarErrorEliminar()">
+            <div class="modal-card modal-card--small" (click)="$event.stopPropagation()">
+              <div class="modal-icon modal-icon--error">🚫</div>
+              <h2>No se pudo eliminar</h2>
+              <p class="modal-texto">{{ errorEliminarMensaje }}</p>
+              <div class="modal-acciones modal-acciones--center">
+                <button class="btn-guardar" (click)="cerrarErrorEliminar()">Entendido</button>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal Nuevo/Editar producto -->
+  <div class="modal-overlay" *ngIf="mostrarForm" (click)="cancelar()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <h2>{{ modoEdicion ? 'Editar producto' : 'Nuevo producto' }}</h2>
+
+      <div class="form-row">
+        <div>
+          <label>Categoría</label>
+          <select [(ngModel)]="form.categoria" (ngModelChange)="onCategoriaChange()">
+            <option value="K-POP">K-POP</option>
+            <option value="ANIME">ANIME</option>
+          </select>
+        </div>
+        <div>
+          <label>Subcategoría</label>
+          <select [(ngModel)]="form.subcategoria" (ngModelChange)="onSubcategoriaChange()">
+            <option *ngFor="let sub of subcategoriasDisponibles" [value]="sub">{{ sub }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Buscador Jikan: solo visible cuando categoría=ANIME y subcategoría=MANGA -->
+      <div class="jikan-search-box" *ngIf="esManga">
+        <label>Buscar en Jikan (MyAnimeList)</label>
+        <div class="jikan-search-row">
+          <input
+            type="text"
+            [(ngModel)]="jikanQuery"
+            placeholder="Ej. Naruto Shippuden"
+            (keydown.enter)="buscarEnJikan()"
+          />
+          <button class="btn-jikan-buscar" (click)="buscarEnJikan()" [disabled]="buscandoJikan">
+            {{ buscandoJikan ? 'Buscando...' : 'Buscar' }}
+          </button>
+        </div>
+
+        <div class="jikan-resultados" *ngIf="resultadosJikan.length > 0">
+          <div
+            class="jikan-resultado-item"
+            *ngFor="let r of resultadosJikan"
+            (click)="usarResultadoJikan(r)"
+          >
+            <img [src]="r.images?.jpg?.image_url" [alt]="r.title" />
+            <span>{{ r.title }}</span>
+          </div>
+        </div>
+
+        <p class="jikan-sin-resultados" *ngIf="jikanBuscado && resultadosJikan.length === 0">
+          No se encontró ningún resultado con ese nombre.
+        </p>
+      </div>
+
+      <label>Nombre</label>
+      <input type="text" [(ngModel)]="form.nombre" placeholder="Ej. One Piece Vol. 1" />
+
+      <label>Descripción</label>
+      <textarea [(ngModel)]="form.descripcion" rows="3" placeholder="Descripción del producto"></textarea>
+
+      <label>Imagen (URL)</label>
+      <input type="text" [(ngModel)]="form.imagen" placeholder="https://..." />
+
+      <label>Descripción de la variante</label>
+      <input type="text" [(ngModel)]="form.varianteDescripcion" placeholder="Ej. Edición estándar" />
+
+      <div class="form-row form-row--3">
+        <div>
+          <label>Precio (S/)</label>
+          <input type="number" [(ngModel)]="form.precio" min="0" step="0.01" />
+        </div>
+        <div>
+          <label>Stock</label>
+          <input type="number" [(ngModel)]="form.stock" min="0" />
+        </div>
+        <div>
+          <label>Stock mínimo</label>
+          <input type="number" [(ngModel)]="form.stockMinimo" min="0" />
+        </div>
+      </div>
+
+      <div class="modal-acciones">
+        <button class="btn-cancelar" (click)="cancelar()" [disabled]="guardando">Cancelar</button>
+        <button class="btn-guardar" (click)="guardar()" [disabled]="guardando">
+          {{ guardando ? 'Guardando...' : (modoEdicion ? 'Guardar cambios' : 'Crear producto') }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Toast de confirmación -->
+  <div class="toast" [class.show]="toastVisible">
+    ✔ {{ toastMensaje }}
+  </div>
+</div>

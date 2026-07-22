@@ -10,47 +10,46 @@
   width: 100%;          /* NUEVO: refuerzo por si acaso */
   height: 100%;
   display: flex;
+  flex-direction: column;
+  background: #0A0A0F;
+}
+
+.login-content {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
   background: #0a0a0f;
-  padding: 24px;
 }
 
 .login-card {
   background: #1A1A24;
-  border: 1px solid rgba(255,45,120,0.25);
+  border: 1px solid rgba(255,45,120,0.15);
   border-radius: 20px;
-  padding: 40px 40px 44px;
+  padding: 48px 44px;
   width: 100%;
   max-width: 420px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 8px 40px rgba(255,45,120,0.1);
+  gap: 18px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.4);
 }
 
-h1 {
+.login-brand { text-align: center; margin-bottom: 6px; }
+
+.login-brand h1 {
   font-family: 'Bebas Neue', cursive;
-  font-size: 40px;
-  letter-spacing: 0.06em;
-  line-height: 1;
-  text-align: center;
-  margin: 0;
+  font-size: 34px;
+  letter-spacing: 0.05em;
   background: linear-gradient(135deg, #fff 40%, #FF2D78);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  margin: 0;
 }
-.brand-icon { -webkit-text-fill-color: #FF2D78; font-size: 32px; }
 
-.login-subtitle {
-  text-align: center;
-  color: #9880B0;
-  font-size: 13px;
-  margin: 10px 0 28px;
-}
+.tagline { color: #9880B0; font-size: 13px; margin-top: 6px; }
 
 .tabs {
   display: flex;
@@ -65,7 +64,7 @@ h1 {
   flex: 1;
   padding: 10px;
   border: none;
-  border-radius: 9px;
+  border-radius: 10px;
   background: transparent;
   color: #9880B0;
   font-weight: 700;
@@ -76,56 +75,60 @@ h1 {
 
 .tabs button.active {
   background: linear-gradient(135deg, #FF2D78, #7B2FBE);
-  color: white;
+  color: #fff;
 }
 
-.error-msg {
-  color: #FF4560;
-  text-align: center;
-  font-size: 13px;
-  background: rgba(255,69,96,0.1);
-  border: 1px solid rgba(255,69,96,0.3);
-  border-radius: 8px;
-  padding: 8px;
-  margin-bottom: 16px;
-}
-
-/* Contenedores de inputs+boton (login/registro) con su propio espaciado interno */
-.form-group { display: flex; flex-direction: column; gap: 14px; }
+.form-fields { display: flex; flex-direction: column; gap: 14px; }
 
 input {
   width: 100%;
   padding: 13px 16px;
   border-radius: 10px;
-  border: 1px solid rgba(255,45,120,0.2);
-  background: #111118;
-  color: #F0E6FF;
+  border: none;
+  background: #F0E6FF;
+  color: #16101F;
   font-size: 14px;
   box-sizing: border-box;
-  transition: 0.2s;
 }
-input:focus {
-  outline: none;
-  border-color: #FF2D78;
-  box-shadow: 0 0 0 3px rgba(255,45,120,0.12);
-}
-input::placeholder { color: #6B6080; }
-input + input { margin-top: 0; }
+
+input::placeholder { color: #7a7a8c; }
 
 .btn-primary {
   width: 100%;
   padding: 13px;
   background: linear-gradient(135deg, #FF2D78, #7B2FBE);
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   margin-top: 6px;
-  transition: 0.25s;
+  transition: 0.2s;
 }
+
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255,45,120,0.35);
+  box-shadow: 0 6px 24px rgba(255,45,120,0.35);
+}
+
+.error-msg { color: #ff6b6b; text-align: center; font-size: 12px; }
+
+.login-footer {
+  border-top: 1px solid rgba(255,45,120,0.15);
+  padding: 20px 40px;
+  text-align: center;
+  color: #6b6b7a;
+  font-size: 12px;
+}
+
+.login-footer .credito {
+  color: #FF2D78;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .login-page { align-items: center; padding: 20px; }
+  .login-card { padding: 32px 24px; }
 }

@@ -26,7 +26,7 @@
     </div>
 
     <!-- Sub-filtros (solo si hay más de 1 subcategoría para elegir) -->
-    <div class="sub-filtros-wrap" *ngIf="subcategoriasDisponibles().length > 2">
+    <div class="sub-filtros-wrap" *ngIf="subcategoriasDisponibles().length > 0">
       <span class="sub-filtros-label">Filtrar por tipo</span>
       <div class="filtros-bar sub-filtros">
         <button
@@ -49,8 +49,8 @@
         <div class="producto-img-wrap">
           <img [src]="p.imagen || 'assets/placeholder.png'" [alt]="p.nombre" />
           <span class="producto-tag" [ngClass]="claseSub(p.subcategoria || p.categoria)">
-          {{ p.subcategoria || p.categoria }}
-        </span>
+            {{ p.subcategoria || p.categoria }}
+          </span>
           <div class="producto-overlay">
             <span class="overlay-text">+ Agregar</span>
           </div>
@@ -80,5 +80,5 @@
     <div class="toast" [class.show]="toastVisible">
       ✔ Producto agregado al carrito
     </div>
-
   </div>
+</div>
