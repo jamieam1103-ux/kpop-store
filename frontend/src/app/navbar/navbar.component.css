@@ -16,14 +16,23 @@
   letter-spacing: 0.06em;
   color: #F0E6FF;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s;
 }
-.navbar-actions { display: flex; align-items: center; gap: 14px; }
+.navbar-brand:hover { color: #FF2D78; transform: translateY(-1px); }
+.brand-icon { color: #FF2D78; font-size: 18px; }
 
-.carrito-btn { position: relative; font-size: 1.4rem; background: #7B2FBE; border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+.navbar-actions { display: flex; align-items: center; gap: 12px; }
+.btn-icon { margin-right: 4px; }
+
+.carrito-btn { position: relative; font-size: 1.3rem; background: #7B2FBE; border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.2s; }
+.carrito-btn:hover { transform: scale(1.08); box-shadow: 0 4px 16px rgba(123,47,190,0.4); }
 .carrito-badge { position: absolute; top: -4px; right: -4px; background: white; color: #7B2FBE; border-radius: 50%; font-size: 0.65rem; font-weight: bold; width: 17px; height: 17px; display: flex; align-items: center; justify-content: center; }
 
-.historial-btn { color: #B06EFF; text-decoration: none; font-weight: 700; font-size: 13px; padding: 8px 16px; border: 1px solid rgba(123,47,190,0.4); border-radius: 10px; background: transparent; transition: 0.2s; }
-.historial-btn:hover { background: rgba(123,47,190,0.15); border-color: #B06EFF; }
+.historial-btn { display: flex; align-items: center; color: #B06EFF; text-decoration: none; font-weight: 700; font-size: 13px; padding: 8px 16px; border: 1px solid rgba(123,47,190,0.4); border-radius: 10px; background: transparent; transition: 0.2s; }
+.historial-btn:hover { background: rgba(123,47,190,0.15); border-color: #B06EFF; transform: translateY(-1px); }
 
-.logout-btn { background: transparent; border: 1px solid rgba(255,45,120,0.3); color: #FF2D78; padding: 8px 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: 0.2s; }
-.logout-btn:hover { background: rgba(255,45,120,0.1); border-color: #FF2D78; }
+.logout-btn { display: flex; align-items: center; background: transparent; border: 1px solid rgba(255,45,120,0.3); color: #FF2D78; padding: 8px 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: 0.2s; }
+.logout-btn:hover { background: rgba(255,45,120,0.1); border-color: #FF2D78; transform: translateY(-1px); }

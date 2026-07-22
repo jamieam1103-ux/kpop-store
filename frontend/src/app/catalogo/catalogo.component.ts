@@ -104,7 +104,9 @@ export class CatalogoComponent implements OnInit {
     this.subcategoriaActiva = '';
   }
 
-  subfiltrar(sub: string) { this.subcategoriaActiva = sub; }
+  subfiltrar(sub: string) {
+    this.subcategoriaActiva = (this.subcategoriaActiva === sub) ? 'TODAS' : sub;
+  }
 
   limpiarFiltros() {
     this.categoriaActiva = 'TODOS';

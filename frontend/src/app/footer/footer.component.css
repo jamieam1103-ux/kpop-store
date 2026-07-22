@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  width: 100%;
+}
+.app-footer {
+  text-align: center;
+  padding: 28px 24px;
+  border-top: 1px solid rgba(255,45,120,0.15);
+  color: #9880B0;
+  font-size: 12px;
+}
+.app-footer p { margin: 4px 0; }
+.dev-credit { color: #7B2FBE; font-weight: 700; letter-spacing: 0.04em; }
