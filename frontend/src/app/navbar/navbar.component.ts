@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CarritoService } from '../services/carrito.service';
@@ -12,6 +12,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  @Input() modoAdmin = false;
+
   constructor(
     public carritoService: CarritoService,
     private authService: AuthService

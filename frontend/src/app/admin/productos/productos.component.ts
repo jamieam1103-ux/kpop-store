@@ -38,8 +38,8 @@ export class AdminProductosComponent implements OnInit {
   jikanBuscado = false;
 
   subcategoriasPorCategoria: Record<string, string[]> = {
-    'K-POP': ['CDS', 'MERCH'],
-    'ANIME': ['MANGA', 'MERCH']
+    'K-POP': ['POSTER', 'ALBUM', 'ACCESORIOS', 'MERCH'],
+    'ANIME': ['SERIE', 'MANGA', 'POSTER', 'FIGURA', 'CD']
   };
 
   form = {
@@ -47,7 +47,7 @@ export class AdminProductosComponent implements OnInit {
     descripcion: '',
     imagen: '',
     categoria: 'K-POP',
-    subcategoria: 'CDS',
+    subcategoria: 'POSTER',
     varianteDescripcion: 'Único',
     precio: 0,
     stock: 0,
@@ -147,7 +147,7 @@ export class AdminProductosComponent implements OnInit {
       descripcion: '',
       imagen: '',
       categoria: 'K-POP',
-      subcategoria: 'CDS',
+      subcategoria: 'POSTER',
       varianteDescripcion: 'Único',
       precio: 0,
       stock: 0,

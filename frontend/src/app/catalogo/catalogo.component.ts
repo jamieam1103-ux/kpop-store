@@ -1,4 +1,4 @@
-import { Component, signal, OnInit } from '@angular/core';
+﻿import { Component, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CarritoService } from '../services/carrito.service';
@@ -28,8 +28,12 @@ export interface Producto {
 export class CatalogoComponent implements OnInit {
 
   categorias = ['TODOS', 'K-POP', 'ANIME'];
+  subcategoriasPorCategoria: { [key: string]: string[] } = {
+    'ANIME': ['SERIE', 'MANGA', 'POSTER', 'FIGURA', 'CD'],
+    'K-POP': ['POSTER', 'ALBUM', 'ACCESORIOS', 'MERCH'],
+  };
   categoriaActiva = 'TODOS';
-  subcategoriaActiva = 'TODAS';
+  subcategoriaActiva = '';
   busqueda = '';
   toastVisible = false;
   cargando = false;
@@ -37,12 +41,13 @@ export class CatalogoComponent implements OnInit {
 
   private productos = signal<Producto[]>([]);
 
+  subcategoriasTodos = ['SERIE', 'MANGA', 'POSTER', 'ALBUM', 'ACCESORIOS', 'MERCH', 'FIGURA', 'CD'];
+
   subcategoriasDisponibles(): string[] {
-    const fuente = this.categoriaActiva === 'TODOS'
-      ? this.productos()
-      : this.productos().filter(p => p.categoria === this.categoriaActiva);
-    const unicas = Array.from(new Set(fuente.map(p => p.subcategoria).filter((s): s is string => !!s)));
-    return ['TODAS', ...unicas];
+    if (this.categoriaActiva === 'TODOS') {
+      return this.subcategoriasTodos;
+    }
+    return this.subcategoriasPorCategoria[this.categoriaActiva] || [];
   }
 
   claseSub(sub: string): string {
@@ -52,7 +57,7 @@ export class CatalogoComponent implements OnInit {
   productosFiltrados(): Producto[] {
     return this.productos().filter(p => {
       const coincideCategoria = this.categoriaActiva === 'TODOS' || p.categoria === this.categoriaActiva;
-      const coincideSubcategoria = this.subcategoriaActiva === 'TODAS' || p.subcategoria === this.subcategoriaActiva;
+      const coincideSubcategoria = !this.subcategoriaActiva || p.subcategoria === this.subcategoriaActiva;
       const coincideBusqueda = p.nombre.toLowerCase().includes(this.busqueda.toLowerCase());
       return coincideCategoria && coincideSubcategoria && coincideBusqueda;
     });
@@ -96,14 +101,14 @@ export class CatalogoComponent implements OnInit {
 
   filtrar(cat: string) {
     this.categoriaActiva = cat;
-    this.subcategoriaActiva = 'TODAS';
+    this.subcategoriaActiva = '';
   }
 
   subfiltrar(sub: string) { this.subcategoriaActiva = sub; }
 
   limpiarFiltros() {
     this.categoriaActiva = 'TODOS';
-    this.subcategoriaActiva = 'TODAS';
+    this.subcategoriaActiva = '';
     this.busqueda = '';
   }
 

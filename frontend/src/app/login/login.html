@@ -1,25 +1,35 @@
 <div class="login-page">
-  <div class="login-card">
-    <h1>✦ KpopStore</h1>
+  <div class="login-content">
+    <div class="login-card">
+      <div class="login-brand">
+        <h1>✦ KPOP STORE</h1>
+        <p class="tagline">Tu tienda de K-pop y anime favorita</p>
+      </div>
 
-    <div class="tabs">
-      <button [class.active]="modo === 'login'" (click)="modo = 'login'; error = ''">Iniciar sesión</button>
-      <button [class.active]="modo === 'registro'" (click)="modo = 'registro'; error = ''">Registrarse</button>
-    </div>
+      <div class="tabs">
+        <button [class.active]="modo === 'login'" (click)="modo = 'login'; error = ''">Iniciar sesión</button>
+        <button [class.active]="modo === 'registro'" (click)="modo = 'registro'; error = ''">Registrarse</button>
+      </div>
 
-    <div *ngIf="error" class="error-msg">{{ error }}</div>
+      <div *ngIf="error" class="error-msg">{{ error }}</div>
 
-    <div *ngIf="modo === 'login'">
-      <input type="email" placeholder="Email" [(ngModel)]="email" />
-      <input type="password" placeholder="Contraseña" [(ngModel)]="password" />
-      <button class="btn-primary" (click)="login()">Entrar</button>
-    </div>
+      <div *ngIf="modo === 'login'" class="form-fields">
+        <input type="email" placeholder="Email" [(ngModel)]="email" />
+        <input type="password" placeholder="Contraseña" [(ngModel)]="password" />
+        <button class="btn-primary" (click)="login()">Entrar</button>
+      </div>
 
-    <div *ngIf="modo === 'registro'">
-      <input type="text" placeholder="Nombre" [(ngModel)]="nombre" />
-      <input type="email" placeholder="Email" [(ngModel)]="email" />
-      <input type="password" placeholder="Contraseña" [(ngModel)]="password" />
-      <button class="btn-primary" (click)="registro()">Crear cuenta</button>
+      <div *ngIf="modo === 'registro'" class="form-fields">
+        <input type="text" placeholder="Nombre" [(ngModel)]="nombre" />
+        <input type="email" placeholder="Email" [(ngModel)]="email" />
+        <input type="password" placeholder="Contraseña" [(ngModel)]="password" />
+        <button class="btn-primary" (click)="registro()">Crear cuenta</button>
+      </div>
     </div>
   </div>
+
+  <footer class="login-footer">
+    <p>© 2026 KPOP STORE. Todos los derechos reservados.</p>
+    <p class="credito">Programado por Jay, Ana &amp; Miguel</p>
+  </footer>
 </div>
