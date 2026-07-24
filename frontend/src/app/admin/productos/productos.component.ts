@@ -90,6 +90,14 @@ export class AdminProductosComponent implements OnInit {
     return this.form.categoria === 'ANIME' && this.form.subcategoria === 'MANGA';
   }
 
+  get esBluRay(): boolean {
+    return this.form.categoria === 'ANIME' && this.form.subcategoria === 'BLU-RAY';
+  }
+
+  get mostrarBuscadorJikan(): boolean {
+    return this.esManga || this.esBluRay;
+  }
+
   onCategoriaChange() {
     this.form.subcategoria = this.subcategoriasDisponibles[0] || '';
     this.resetJikan();
@@ -113,7 +121,11 @@ export class AdminProductosComponent implements OnInit {
     this.buscandoJikan = true;
     this.jikanBuscado = false;
 
-    this.jikanService.buscarManga(q).subscribe({
+    const busqueda = this.esBluRay
+      ? this.jikanService.buscarAnime(q)
+      : this.jikanService.buscarManga(q);
+
+    busqueda.subscribe({
       next: (resp) => {
         this.resultadosJikan = resp.data || [];
         this.buscandoJikan = false;
@@ -238,12 +250,15 @@ export class AdminProductosComponent implements OnInit {
       next: () => {
         this.guardando = false;
         this.mostrarForm = false;
+        this.mostrarToast(this.modoEdicion ? `"${this.form.nombre}" fue actualizado` : `"${this.form.nombre}" fue creado`);
+        this.cdr.detectChanges();
         this.cargarProductos();
       },
       error: () => {
         this.guardando = false;
         alert('El producto se guardó, pero hubo un problema al guardar precio/stock.');
         this.mostrarForm = false;
+        this.cdr.detectChanges();
         this.cargarProductos();
       }
     });
