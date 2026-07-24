@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <a routerLink="/catalogo" class="navbar-brand">
+  <a [routerLink]="modoAdmin ? '/admin' : '/catalogo'" class="navbar-brand">
     <span class="brand-icon">✦</span> KPOP STORE
   </a>
   <div class="navbar-actions">

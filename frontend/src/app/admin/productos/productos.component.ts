@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { NavbarComponent } from '../../navbar/navbar.component';
 import { ProductoService, ProductoBackend, ProductoPayload } from '../../services/producto.service';
 import { VarianteService } from '../../services/variante.service';
 import { JikanService, JikanMangaResultado } from '../../services/jikan.service';
@@ -9,7 +10,7 @@ import { JikanService, JikanMangaResultado } from '../../services/jikan.service'
 @Component({
   selector: 'app-admin-productos',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, NavbarComponent],
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
 })
@@ -39,7 +40,7 @@ export class AdminProductosComponent implements OnInit {
 
   subcategoriasPorCategoria: Record<string, string[]> = {
     'K-POP': ['POSTER', 'ALBUM', 'ACCESORIOS', 'MERCH'],
-    'ANIME': ['SERIE', 'MANGA', 'POSTER', 'FIGURA', 'CD']
+    'ANIME': ['BLU-RAY', 'MANGA', 'POSTER', 'FIGURA', 'CD']
   };
 
   form = {

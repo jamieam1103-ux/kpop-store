@@ -1,4 +1,4 @@
-.productos-page { padding: 40px; min-height: 100vh; background: #0d0d0d; color: white; }
+.productos-page { max-width: 1300px; margin: 0 auto; padding: 108px 24px 80px; min-height: 100vh; background: #0d0d0d; color: white; }
 .btn-secondary { display: inline-block; color: #ccc; text-decoration: none; margin-bottom: 20px; font-size: 0.9rem; }
 .btn-secondary:hover { color: white; }
 .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }

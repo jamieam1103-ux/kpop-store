@@ -29,7 +29,7 @@ export class CatalogoComponent implements OnInit {
 
   categorias = ['TODOS', 'K-POP', 'ANIME'];
   subcategoriasPorCategoria: { [key: string]: string[] } = {
-    'ANIME': ['SERIE', 'MANGA', 'POSTER', 'FIGURA', 'CD'],
+    'ANIME': ['BLU-RAY', 'MANGA', 'POSTER', 'FIGURA', 'CD'],
     'K-POP': ['POSTER', 'ALBUM', 'ACCESORIOS', 'MERCH'],
   };
   categoriaActiva = 'TODOS';
@@ -41,7 +41,7 @@ export class CatalogoComponent implements OnInit {
 
   private productos = signal<Producto[]>([]);
 
-  subcategoriasTodos = ['SERIE', 'MANGA', 'POSTER', 'ALBUM', 'ACCESORIOS', 'MERCH', 'FIGURA', 'CD'];
+  subcategoriasTodos = ['BLU-RAY', 'MANGA', 'POSTER', 'ALBUM', 'ACCESORIOS', 'MERCH', 'FIGURA', 'CD'];
 
   subcategoriasDisponibles(): string[] {
     if (this.categoriaActiva === 'TODOS') {

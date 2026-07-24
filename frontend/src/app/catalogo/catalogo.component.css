@@ -28,7 +28,7 @@
 .filtro-btn.sub.sub-poster { border-color: #FFB020; color: #FFC960; }
 .filtro-btn.sub.sub-merch { border-color: #34D399; color: #6FE8BC; }
 .filtro-btn.sub.sub-album { border-color: #FF2D78; color: #FF6FA8; }
-.filtro-btn.sub.sub-serie { border-color: #7B2FBE; color: #B06EFF; }
+.filtro-btn.sub.sub-blue-ray { border-color: #7B2FBE; color: #B06EFF; }
 .filtro-btn.sub.sub-accesorios { border-color: #FFB020; color: #FFC960; }
 .filtro-btn.sub.sub-figura { border-color: #34D399; color: #6FE8BC; }
 .filtro-btn.sub.sub-cd { border-color: #FF2D78; color: #FF6FA8; }
@@ -37,7 +37,7 @@
 .producto-tag.sub-poster { background: rgba(255,176,32,0.2); color: #FFC960; border: 1px solid #FFB020; }
 .producto-tag.sub-merch { background: rgba(52,211,153,0.2); color: #6FE8BC; border: 1px solid #34D399; }
 .producto-tag.sub-album { background: rgba(255,45,120,0.2); color: #FF6FA8; border: 1px solid #FF2D78; }
-.producto-tag.sub-serie { background: rgba(123,47,190,0.2); color: #B06EFF; border: 1px solid #7B2FBE; }
+.producto-tag.sub-blue-ray { background: rgba(123,47,190,0.2); color: #B06EFF; border: 1px solid #7B2FBE; }
 .producto-tag.sub-accesorios { background: rgba(255,176,32,0.2); color: #FFC960; border: 1px solid #FFB020; }
 .producto-tag.sub-figura { background: rgba(52,211,153,0.2); color: #6FE8BC; border: 1px solid #34D399; }
 .producto-tag.sub-cd { background: rgba(255,45,120,0.2); color: #FF6FA8; border: 1px solid #FF2D78; }
@@ -68,7 +68,7 @@
 .producto-card:hover .producto-img-wrap img { transform: scale(1.06); }
 
 .producto-tag { position: absolute; top: 12px; left: 12px; font-size: 13px; font-weight: 700; padding: 7px 18px; border-radius: 20px; letter-spacing: 0.03em; }
-.producto-tag.sub-serie      { background: rgba(123,47,190,0.25); color: #C89BFF; border: 1.5px solid #7B2FBE; }
+.producto-tag.sub-blu-ray      { background: rgba(123,47,190,0.25); color: #C89BFF; border: 1.5px solid #7B2FBE; }
 .producto-tag.sub-manga      { background: rgba(62,166,255,0.25); color: #8FD3FF; border: 1.5px solid #3EA6FF; }
 .producto-tag.sub-poster     { background: rgba(255,176,32,0.25); color: #FFD180; border: 1.5px solid #FFB020; }
 .producto-tag.sub-figura     { background: rgba(52,211,153,0.25); color: #8FF0CE; border: 1.5px solid #34D399; }
