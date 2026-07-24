@@ -99,13 +99,13 @@
       </div>
 
       <!-- Buscador Jikan: solo visible cuando categoría=ANIME y subcategoría=MANGA -->
-      <div class="jikan-search-box" *ngIf="esManga">
-        <label>Buscar en Jikan (MyAnimeList)</label>
+      <div class="jikan-search-box" *ngIf="mostrarBuscadorJikan">
+        <label>Buscar en Jikan (MyAnimeList) — {{ esBluRay ? 'Anime' : 'Manga' }}</label>
         <div class="jikan-search-row">
           <input
             type="text"
             [(ngModel)]="jikanQuery"
-            placeholder="Ej. Naruto Shippuden"
+            [placeholder]="esBluRay ? 'Ej. Naruto Shippuden' : 'Ej. One Piece'"
             (keydown.enter)="buscarEnJikan()"
           />
           <button class="btn-jikan-buscar" (click)="buscarEnJikan()" [disabled]="buscandoJikan">
