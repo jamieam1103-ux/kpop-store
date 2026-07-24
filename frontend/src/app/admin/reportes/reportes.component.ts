@@ -75,7 +75,8 @@ export class ReportesComponent implements OnInit {
         const nombre = d.varianteDescripcion || `Variante #${d.varianteId}`;
         if (!prodMap[key]) prodMap[key] = { nombre, unidades: 0, ingresos: 0 };
         prodMap[key].unidades += d.cantidad || 0;
-        prodMap[key].ingresos += (d.precioUnitario || 0) * (d.cantidad || 0);
+        prodMap[key].ingresos += (+
+          d.precioUnitario || 0) * (d.cantidad || 0);
       });
     });
     const prodArray = Object.values(prodMap);
