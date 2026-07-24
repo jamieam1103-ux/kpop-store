@@ -16,7 +16,7 @@ public class CorsConfig {
         config.setAllowedOrigins(List.of(
                 "http://localhost:4200",
                 "http://localhost:50969",
-                "https://kpop-store-app.netlify.app"
+                "https://kpop-store-2026.netlify.app"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         config.setAllowedHeaders(List.of("*"));
