@@ -1,5 +1,5 @@
 <div class="reportes-page">
-  <app-navbar></app-navbar>
+  <app-navbar [modoAdmin]="true"></app-navbar>
   <div class="dash-topbar">
     <div>
       <h1>Reportes</h1>
@@ -24,6 +24,28 @@
       <div class="kpi-card kpi-card--blue">
         <div class="kpi-icon">📊</div>
         <div class="kpi-data"><span class="kpi-label">Ticket Promedio</span><span class="kpi-value">S/ {{ ticketPromedio | number:'1.2-2' }}</span></div>
+      </div>
+    </div>
+    <div class="section-grid">
+      <div class="report-card producto-extremo producto-extremo--top" *ngIf="productoMasVendido">
+        <h2>🏆 Producto Más Vendido</h2>
+        <div class="extremo-body">
+          <span class="extremo-nombre">{{ productoMasVendido.nombre }}</span>
+          <div class="extremo-metrics">
+            <span class="units-badge">{{ productoMasVendido.unidades }} unidades</span>
+            <span class="ingreso-val">S/ {{ productoMasVendido.ingresos | number:'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="report-card producto-extremo producto-extremo--bottom" *ngIf="productoMenosVendido">
+        <h2>🐢 Producto Menos Vendido</h2>
+        <div class="extremo-body">
+          <span class="extremo-nombre">{{ productoMenosVendido.nombre }}</span>
+          <div class="extremo-metrics">
+            <span class="units-badge">{{ productoMenosVendido.unidades }} unidades</span>
+            <span class="ingreso-val">S/ {{ productoMenosVendido.ingresos | number:'1.2-2' }}</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="section-grid">

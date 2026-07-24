@@ -98,7 +98,18 @@ public class PedidoService {
                 DetallePedidoDTO dd = new DetallePedidoDTO();
                 dd.setId(d.getId());
                 dd.setVarianteId(d.getVariante().getId());
-                dd.setVarianteDescripcion(d.getVariante().getDescripcion());
+                String nombreProducto = d.getVariante().getProducto() != null
+                        ? d.getVariante().getProducto().getNombre() : null;
+                String descVariante = d.getVariante().getDescripcion();
+                String descripcionCompleta;
+                if (nombreProducto != null && !nombreProducto.isBlank()) {
+                    descripcionCompleta = (descVariante != null && !descVariante.isBlank())
+                            ? nombreProducto + " - " + descVariante
+                            : nombreProducto;
+                } else {
+                    descripcionCompleta = descVariante;
+                }
+                dd.setVarianteDescripcion(descripcionCompleta);
                 dd.setCantidad(d.getCantidad());
                 dd.setPrecioUnitario(d.getPrecioUnitario());
                 return dd;

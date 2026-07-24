@@ -1,0 +1,85 @@
+<div class="boleta-page">
+  <div class="no-print">
+    <app-navbar></app-navbar>
+  </div>
+
+  <div *ngIf="cargando" class="spinner no-print"></div>
+
+  <div *ngIf="!cargando && error" class="empty-state no-print">
+    <div class="icon">⚠️</div>
+    <h3>No se pudo cargar la boleta</h3>
+    <p>Verifica que el pedido exista o inténtalo nuevamente.</p>
+    <a routerLink="/pedidos/historial" class="kpop-btn">Volver a mis pedidos</a>
+  </div>
+
+  <div class="boleta-wrap" *ngIf="!cargando && !error && pedido">
+    <div class="boleta-toolbar no-print">
+      <a routerLink="/pedidos/historial" class="btn-secondary">&larr; Volver a mis pedidos</a>
+      <button class="btn-imprimir" (click)="imprimir()">🖨️ Imprimir / Guardar PDF</button>
+    </div>
+
+    <div class="boleta-card">
+      <div class="boleta-header">
+        <div class="boleta-marca">
+          <span class="marca-nombre">KPOP STORE</span>
+          <span class="marca-slogan">K-Pop · Anime · Manga</span>
+        </div>
+        <div class="boleta-tipo">
+          <span class="tipo-label">BOLETA DE VENTA ELECTRÓNICA</span>
+          <span class="tipo-numero">{{ numeroBoleta }}</span>
+        </div>
+      </div>
+
+      <div class="boleta-info">
+        <div class="info-col">
+          <span class="info-label">Cliente</span>
+          <span class="info-valor">{{ pedido.usuarioNombre || 'Cliente' }}</span>
+          <span class="info-sub" *ngIf="pedido.usuarioEmail">{{ pedido.usuarioEmail }}</span>
+        </div>
+        <div class="info-col info-col--right">
+          <span class="info-label">Fecha de emisión</span>
+          <span class="info-valor">{{ pedido.fecha | date:'dd/MM/yyyy HH:mm' }}</span>
+          <span class="info-sub">Pedido #{{ pedido.id }} · {{ pedido.estado }}</span>
+        </div>
+      </div>
+
+      <table class="boleta-tabla">
+        <thead>
+        <tr>
+          <th>Descripción</th>
+          <th>Cant.</th>
+          <th>P. Unit.</th>
+          <th>Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let d of pedido.detalles">
+          <td>{{ d.varianteDescripcion || ('Variante #' + d.varianteId) }}</td>
+          <td>{{ d.cantidad }}</td>
+          <td>S/ {{ (d.precioUnitario ?? 0) | number:'1.2-2' }}</td>
+          <td>S/ {{ ((d.precioUnitario ?? 0) * d.cantidad) | number:'1.2-2' }}</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="boleta-totales">
+        <div class="total-row">
+          <span>Op. Gravada</span>
+          <span>S/ {{ baseImponible | number:'1.2-2' }}</span>
+        </div>
+        <div class="total-row">
+          <span>IGV (18%)</span>
+          <span>S/ {{ igv | number:'1.2-2' }}</span>
+        </div>
+        <div class="total-row total-row--final">
+          <span>Total</span>
+          <span>S/ {{ (pedido.total ?? subtotal) | number:'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <div class="boleta-footer">
+        <p>Gracias por tu compra en KPOP STORE ✦ Este documento es un comprobante de referencia.</p>
+      </div>
+    </div>
+  </div>
+</div>

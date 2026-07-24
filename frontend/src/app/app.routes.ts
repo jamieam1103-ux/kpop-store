@@ -39,6 +39,13 @@ export const routes: Routes = [
   },
 
   {
+    path: 'pedidos/boleta/:id',
+    canActivate: [authGuard],
+    loadComponent: () => import('./pedidos/boleta/boleta.component')
+      .then(m => m.BoletaComponent)
+  },
+
+  {
     path: 'admin',
     canActivate: [adminGuard],
     loadComponent: () => import('./admin/dashboard/dashboard.component')

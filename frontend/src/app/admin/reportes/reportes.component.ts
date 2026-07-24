@@ -1,5 +1,5 @@
 import { NavbarComponent } from '../../navbar/navbar.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PedidoService } from '../../services/pedido.service';
 
@@ -17,17 +17,31 @@ export class ReportesComponent implements OnInit {
   ventasPorCategoria: { nombre: string; total: number; porcentaje: number; color: string }[] = [];
   pedidosPorEstado:   { nombre: string; cantidad: number; porcentaje: number }[] = [];
   topProductos:       { nombre: string; unidades: number; ingresos: number }[] = [];
+  productoMasVendido: { nombre: string; unidades: number; ingresos: number } | null = null;
+  productoMenosVendido: { nombre: string; unidades: number; ingresos: number } | null = null;
 
-  constructor(private pedidoService: PedidoService) {}
+  constructor(private pedidoService: PedidoService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     (this.pedidoService as any).listarPedidos().subscribe({
       next: (pedidos: any[]) => {
-        this.pedidos = pedidos;
-        this.calcularMetricas(pedidos);
-        this.cargando = false;
+        try {
+          this.pedidos = pedidos;
+          this.calcularMetricas(pedidos);
+        } catch (e) {
+          console.error('ERROR EN calcularMetricas:', e);
+          alert('Error procesando datos de reportes: ' + (e as any)?.message);
+        } finally {
+          this.cargando = false;
+          this.cdr.detectChanges();
+        }
       },
-      error: () => { this.cargando = false; }
+      error: (err: any) => {
+        console.error('ERROR EN listarPedidos:', err);
+        alert('Error al obtener pedidos: ' + (err?.message || JSON.stringify(err)));
+        this.cargando = false;
+        this.cdr.detectChanges();
+      }
     });
   }
 
@@ -54,17 +68,22 @@ export class ReportesComponent implements OnInit {
     this.pedidosPorEstado = Object.entries(estadoMap).map(([nombre, cantidad]) => ({
       nombre, cantidad, porcentaje: this.totalPedidos > 0 ? (cantidad / this.totalPedidos) * 100 : 0
     }));
-    const prodMap: Record<string, { unidades: number; ingresos: number }> = {};
+    const prodMap: Record<string, { nombre: string; unidades: number; ingresos: number }> = {};
     pedidos.forEach(p => {
       p.detalles?.forEach((d: any) => {
-        const key = d.varianteDescripcion || `Variante #${d.varianteId}`;
-        if (!prodMap[key]) prodMap[key] = { unidades: 0, ingresos: 0 };
+        const key = String(d.varianteId);
+        const nombre = d.varianteDescripcion || `Variante #${d.varianteId}`;
+        if (!prodMap[key]) prodMap[key] = { nombre, unidades: 0, ingresos: 0 };
         prodMap[key].unidades += d.cantidad || 0;
         prodMap[key].ingresos += (d.precioUnitario || 0) * (d.cantidad || 0);
       });
     });
-    this.topProductos = Object.entries(prodMap)
-      .map(([nombre, data]) => ({ nombre, ...data }))
+    const prodArray = Object.values(prodMap);
+    this.topProductos = [...prodArray]
       .sort((a, b) => b.ingresos - a.ingresos).slice(0, 10);
+
+    const porUnidades = [...prodArray].sort((a, b) => b.unidades - a.unidades);
+    this.productoMasVendido = porUnidades.length ? porUnidades[0] : null;
+    this.productoMenosVendido = porUnidades.length ? porUnidades[porUnidades.length - 1] : null;
   }
 }

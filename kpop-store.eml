@@ -4,6 +4,7 @@
 	<contentEntry url="file://$MODULE_DIR$">
 		<testFolder url="file://$MODULE_DIR$/src/test/java"/>
 		<testFolder url="file://$MODULE_DIR$/src/test/resources"/>
+		<testFolder url="file://$MODULE_DIR$/target/generated-test-sources/test-annotations"/>
 		<excludeFolder url="file://$MODULE_DIR$/target"/>
 	</contentEntry>
 	<lib name="Maven: org.hibernate.common:hibernate-commons-annotations:7.0.3.Final" scope="RUNTIME"/>

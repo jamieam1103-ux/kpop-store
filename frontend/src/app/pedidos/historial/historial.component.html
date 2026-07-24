@@ -34,14 +34,17 @@
           <span>Total pagado</span>
           <span class="total-val">S/ {{ pedido.total | number:'1.2-2' }}</span>
         </div>
-        <details class="pedido-detalles">
-          <summary>Ver detalles</summary>
-          <div class="detalles-extra">
-            <p><strong>Pedido ID:</strong> {{ pedido.id }}</p>
-            <p><strong>Items:</strong> {{ pedido.detalles.length }}</p>  <!-- ← quitado ?. -->
-            <p><strong>Estado:</strong> {{ pedido.estado }}</p>
-          </div>
-        </details>
+        <div class="pedido-foot-acciones">
+          <a [routerLink]="['/pedidos/boleta', pedido.id]" class="kpop-btn kpop-btn--boleta">🧾 Ver boleta</a>
+          <details class="pedido-detalles">
+            <summary>Ver detalles</summary>
+            <div class="detalles-extra">
+              <p><strong>Pedido ID:</strong> {{ pedido.id }}</p>
+              <p><strong>Items:</strong> {{ pedido.detalles.length }}</p>
+              <p><strong>Estado:</strong> {{ pedido.estado }}</p>
+            </div>
+          </details>
+        </div>
       </div>
     </div>
   </div>

@@ -11,11 +11,12 @@ export interface DetallePedidoDTO {
 }
 
 export interface PedidoDTO {
-  id: number;           // ← quitado el ?
+  id: number;
   usuarioId: number;
   usuarioNombre?: string;
+  usuarioEmail?: string;
   fecha?: string;
-  estado: string;       // ← quitado el ?
+  estado: string;
   total?: number;
   detalles: DetallePedidoDTO[];
 }
