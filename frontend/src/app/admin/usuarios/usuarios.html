@@ -1,5 +1,5 @@
 <div class="usuarios-page">
-  <a routerLink="/admin" class="btn-secondary">&larr; Volver al panel</a>
+  <app-navbar [modoAdmin]="true"></app-navbar>
   <h1>Gestión de Usuarios</h1>
 
   <div *ngIf="cargando" class="spinner"></div>

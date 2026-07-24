@@ -1,26 +1,16 @@
 .usuarios-page {
-  padding: 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 108px 24px 80px;
   min-height: 100vh;
   background: #0d0d0d;
-  color: white;
-}
-
-.btn-secondary {
-  display: block;
-  color: #ccc;
-  text-decoration: none;
-  margin-bottom: 20px;
-  font-size: 0.9rem;
-}
-
-.btn-secondary:hover {
   color: white;
 }
 
 .usuarios-page h1 {
   font-size: 2rem;
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
   background: linear-gradient(90deg, #c850c0, #ff2d78);
   -webkit-background-clip: text;
   background-clip: text;
